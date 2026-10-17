@@ -1,18 +1,34 @@
-// Program rail: the card nearest the viewport center is "active" (dark text,
-// accent eyebrow) like google.org; arrows move one card pitch and disable at the ends.
+// Program rail: loops forever. The eight cards are cloned once on each side
+// (three copies in a row); the user always scrolls the middle copy, and when a
+// scroll settles on a clone the track jumps silently by one set so the same
+// card is showing from the middle copy again. The card nearest the center is
+// "active" (dark text, accent eyebrow) like google.org.
 (function () {
   const carousel = document.querySelector('[data-carousel]');
   if (!carousel) return;
   const track = carousel.querySelector('[data-track]');
-  const cards = Array.from(track.querySelectorAll('.card'));
   const prev = carousel.querySelector('[data-prev]');
   const next = carousel.querySelector('[data-next]');
 
+  const originals = Array.from(track.querySelectorAll('.card'));
+  const n = originals.length;
+  if (n < 2) return;
+
+  const clone = (card) => {
+    const c = card.cloneNode(true);
+    c.setAttribute('aria-hidden', 'true');
+    c.querySelectorAll('a').forEach((a) => a.setAttribute('tabindex', '-1'));
+    c.querySelectorAll('img').forEach((img) => img.setAttribute('loading', 'lazy'));
+    return c;
+  };
+  originals.forEach((card) => track.appendChild(clone(card)));
+  originals.slice().reverse().forEach((card) => track.insertBefore(clone(card), track.firstChild));
+
+  const cards = Array.from(track.querySelectorAll('.card'));
+
   function pitch() {
-    const card = cards[0];
-    if (!card) return 378;
     const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
-    return card.getBoundingClientRect().width + gap;
+    return cards[0].getBoundingClientRect().width + gap;
   }
 
   function activeIndex() {
@@ -26,28 +42,45 @@
     return best;
   }
 
+  function jumpTo(i) {
+    track.style.scrollBehavior = 'auto';
+    track.scrollLeft = i * pitch();
+    track.style.scrollBehavior = '';
+  }
+
   function sync() {
     const i = activeIndex();
     cards.forEach((c, j) => c.classList.toggle('is-active', j === i));
-    prev.disabled = i === 0;
-    next.disabled = i === cards.length - 1;
   }
 
-  function goTo(i) {
-    i = Math.max(0, Math.min(cards.length - 1, i));
-    track.scrollTo({ left: i * pitch(), behavior: 'smooth' });
+  // Once a scroll settles on a clone, jump back into the middle set.
+  function normalize() {
+    const i = activeIndex();
+    if (i < n) jumpTo(i + n);
+    else if (i >= 2 * n) jumpTo(i - n);
+    sync();
   }
 
-  prev.addEventListener('click', () => goTo(activeIndex() - 1));
-  next.addEventListener('click', () => goTo(activeIndex() + 1));
-  track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
-  window.addEventListener('resize', () => { goTo(activeIndex()); sync(); });
+  let settle;
+  track.addEventListener('scroll', () => {
+    requestAnimationFrame(sync);
+    clearTimeout(settle);
+    settle = setTimeout(normalize, 120);
+  }, { passive: true });
+  if ('onscrollend' in window) track.addEventListener('scrollend', normalize);
 
-  // Start on the third card (financial aid) so a landscape card sits on each side.
-  const start = Math.min(2, cards.length - 1);
-  track.style.scrollBehavior = 'auto';
-  track.scrollLeft = start * pitch();
-  track.style.scrollBehavior = '';
+  function step(dir) {
+    clearTimeout(settle);
+    normalize();
+    track.scrollTo({ left: (activeIndex() + dir) * pitch(), behavior: 'smooth' });
+  }
+  prev.addEventListener('click', () => step(-1));
+  next.addEventListener('click', () => step(1));
+  window.addEventListener('resize', () => { jumpTo(activeIndex()); sync(); });
+
+  // Start on the third card (financial aid) of the middle set so a landscape
+  // card sits on each side.
+  jumpTo(n + Math.min(2, n - 1));
   sync();
 })();
 
