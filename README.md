@@ -23,7 +23,7 @@ Measured from google.org at 1512px wide and reproduced here:
 
 | Element | Value |
 |---|---|
-| Header | 64px tall; logo 17px from the left; nav links 16px `#5f6368`, 48px tall, 12px side padding |
+| Header | copied from arulhealth.com, not google.org: 80px translucent bar (20px backdrop blur, hairline rule), 64px side padding, 36px logo, Inter 17px/500 links centered on the bar, "Try Arul →" button (`#0B2A16` on `#CFFADF`, 12px radius, 10×20 padding) |
 | Content column | 1296px, 108px side margins |
 | Hero h1 | 60px / 72px, -0.5px tracking, centered, 80px above |
 | Program rail | 302.4px square cards on a 378px pitch; active card centered, dark text; landscape cards 302 × 202 vertically centered; 50px round arrows bottom right |
