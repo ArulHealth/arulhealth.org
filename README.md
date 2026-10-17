@@ -11,7 +11,7 @@ Plain HTML, CSS, and a few lines of JavaScript. No build step, no dependencies. 
 ```
 index.html       the page
 styles.css       tokens + layout (measurements from a 1512px google.org capture)
-script.js        program rail (infinite loop, centered active card, arrows), mobile menu
+script.js        program rail (transform-driven endless slider: wheel, drag, arrows), mobile menu
 assets/          logo, favicon
 assets/photos/   card and section photos
 CNAME            custom domain for GitHub Pages
