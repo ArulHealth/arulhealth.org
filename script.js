@@ -1,29 +1,63 @@
-// Program rail: scroll one card-width per click, disable arrows at the ends.
+// Program rail: the card nearest the viewport center is "active" (dark text,
+// accent eyebrow) like google.org; arrows move one card pitch and disable at the ends.
 (function () {
   const carousel = document.querySelector('[data-carousel]');
   if (!carousel) return;
   const track = carousel.querySelector('[data-track]');
+  const cards = Array.from(track.querySelectorAll('.card'));
   const prev = carousel.querySelector('[data-prev]');
   const next = carousel.querySelector('[data-next]');
 
-  function step() {
-    const card = track.querySelector('.card');
-    if (!card) return 280;
-    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 20;
+  function pitch() {
+    const card = cards[0];
+    if (!card) return 378;
+    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
     return card.getBoundingClientRect().width + gap;
   }
 
-  function sync() {
-    const max = track.scrollWidth - track.clientWidth - 1;
-    prev.disabled = track.scrollLeft <= 0;
-    next.disabled = track.scrollLeft >= max;
+  function activeIndex() {
+    const mid = track.getBoundingClientRect().left + track.clientWidth / 2;
+    let best = 0, bestDist = Infinity;
+    cards.forEach((c, i) => {
+      const r = c.getBoundingClientRect();
+      const d = Math.abs(r.left + r.width / 2 - mid);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    return best;
   }
 
-  prev.addEventListener('click', () => track.scrollBy({ left: -step() * 2, behavior: 'smooth' }));
-  next.addEventListener('click', () => track.scrollBy({ left: step() * 2, behavior: 'smooth' }));
-  track.addEventListener('scroll', sync, { passive: true });
-  window.addEventListener('resize', sync);
+  function sync() {
+    const i = activeIndex();
+    cards.forEach((c, j) => c.classList.toggle('is-active', j === i));
+    prev.disabled = i === 0;
+    next.disabled = i === cards.length - 1;
+  }
+
+  function goTo(i) {
+    i = Math.max(0, Math.min(cards.length - 1, i));
+    track.scrollTo({ left: i * pitch(), behavior: 'smooth' });
+  }
+
+  prev.addEventListener('click', () => goTo(activeIndex() - 1));
+  next.addEventListener('click', () => goTo(activeIndex() + 1));
+  track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+  window.addEventListener('resize', () => { goTo(activeIndex()); sync(); });
+
+  // Start on the third card (financial aid) so a landscape card sits on each side.
+  const start = Math.min(2, cards.length - 1);
+  track.style.scrollBehavior = 'auto';
+  track.scrollLeft = start * pitch();
+  track.style.scrollBehavior = '';
   sync();
+})();
+
+// Header shadow once the page has scrolled, like google.org.
+(function () {
+  const header = document.querySelector('[data-header]');
+  if (!header) return;
+  const update = () => header.classList.toggle('is-scrolled', window.scrollY > 4);
+  window.addEventListener('scroll', update, { passive: true });
+  update();
 })();
 
 // Mobile menu
@@ -31,19 +65,13 @@
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.getElementById('mobile-nav');
   if (!toggle || !nav) return;
-  toggle.addEventListener('click', () => {
-    const open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!open));
-    toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
-    nav.hidden = open;
-  });
-  nav.addEventListener('click', (e) => {
-    if (e.target.closest('a')) {
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Open menu');
-      nav.hidden = true;
-    }
-  });
+  const set = (open) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    nav.hidden = !open;
+  };
+  toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
 })();
 
 // Footer year
