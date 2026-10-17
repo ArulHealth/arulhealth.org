@@ -106,6 +106,7 @@ h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
   font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 .header-inner {
+  position: relative;
   display: flex; align-items: center; justify-content: space-between;
   height: 79px;
   padding-left: max(64px, env(safe-area-inset-left, 0px));
@@ -116,11 +117,13 @@ h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
 /* The wordmark's text baseline sits at y=200 of the SVG's 205 units; the
    ".org" (Google Sans 500, asc/desc ~0.94em/0.29em) is pulled down so both
    baselines meet: (size - asc + desc)/2 - 36*5/205. */
-.brand-suffix { font-family: var(--font-display); font-weight: 500; font-size: 28px; line-height: 1; color: var(--ink); margin-bottom: -4px; }
+.brand-suffix { font-family: var(--font-display); font-weight: 500; font-size: 24px; line-height: 1; color: var(--ink); margin-bottom: -3px; }
 .brand-small { align-items: center; }
 .brand-small img { height: 24px; }
 
-.site-nav { display: flex; align-items: center; gap: 40px; }
+/* Centered on the bar itself (space-between would offset it by the
+   difference between the logo and button widths). */
+.site-nav { display: flex; align-items: center; gap: 40px; position: absolute; left: 50%; transform: translateX(-50%); }
 .site-nav a {
   font-size: 17px; line-height: 1.5; font-weight: 500; color: #1f2937;
   white-space: nowrap; transition: color .2s;
