@@ -94,43 +94,58 @@ h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
   .lede { font-size: 20px; line-height: 28px; }
 }
 
-/* ---------- Header (64px, logo 17px in, nav 26px after the logo) ---------- */
+/* ---------- Header: copied from arulhealth.com ----------
+   80px bar (79 + 1px rule), 64px side padding, 36px logo, Inter 17/500 links
+   40px apart, translucent #fcfcfc with a 20px backdrop blur, and the
+   "Try Arul →" button (#0B2A16 on #CFFADF, 12px radius, 10x20 padding). */
 .site-header {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
-  background: var(--bg);
-  transition: box-shadow .2s;
+  background: rgba(252, 252, 252, 0.85);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
-.site-header.is-scrolled { box-shadow: 0 1px 2px rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15); }
 .header-inner {
-  display: flex; align-items: center;
-  height: 64px;
-  padding-left: max(17px, env(safe-area-inset-left, 0px));
-  padding-right: max(8px, env(safe-area-inset-right, 0px));
+  display: flex; align-items: center; justify-content: space-between;
+  height: 79px;
+  padding-left: max(64px, env(safe-area-inset-left, 0px));
+  padding-right: max(64px, env(safe-area-inset-right, 0px));
 }
-/* The wordmark's text baseline sits at y=200 of the SVG's 205 units, so with
-   the image bottom-aligned the ".org" baseline must land ~0.5px above the
-   image bottom: line-height 1 + a small negative margin for the descender. */
-.brand { display: inline-flex; align-items: flex-end; gap: 1px; height: 48px; padding-block: 13px; }
-.brand img { width: auto; height: 22px; }
-.brand-suffix { font-family: var(--font-display); font-weight: 500; font-size: 17px; line-height: 1; color: var(--ink); margin-bottom: -2.5px; }
+.brand { display: inline-flex; align-items: flex-end; gap: 1px; flex-shrink: 0; }
+.brand img { width: auto; height: 36px; }
+/* The wordmark's text baseline sits at y=200 of the SVG's 205 units; the
+   ".org" (Google Sans 500, asc/desc ~0.94em/0.29em) is pulled down so both
+   baselines meet: (size - asc + desc)/2 - 36*5/205. */
+.brand-suffix { font-family: var(--font-display); font-weight: 500; font-size: 28px; line-height: 1; color: var(--ink); margin-bottom: -4px; }
+.brand-small { align-items: center; }
 .brand-small img { height: 24px; }
 
-.site-nav { margin-left: 26px; }
-.site-nav ul { display: flex; }
+.site-nav { display: flex; align-items: center; gap: 40px; }
 .site-nav a {
-  display: flex; align-items: center; height: 48px; padding: 0 12px;
-  font-size: 16px; line-height: 24px; letter-spacing: 0.25px; color: var(--ink-2);
-  border-radius: 4px;
+  font-size: 17px; line-height: 1.5; font-weight: 500; color: #1f2937;
+  white-space: nowrap; transition: color .2s;
 }
-.site-nav a:hover { background: #f1f3f4; color: var(--ink); }
+.site-nav a:hover { color: #000; }
+
+.header-actions { display: flex; align-items: center; gap: 24px; flex-shrink: 0; }
+.btn-try {
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  background: #0b2a16; color: #cffadf;
+  border-radius: 12px; padding: 10px 20px;
+  font-size: 15px; line-height: 1.5; font-weight: 500;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: background-color .2s;
+}
+.btn-try:hover { background: #06180c; }
+.btn-arrow { display: inline-block; transition: transform .2s; }
+.btn-try:hover .btn-arrow { transform: translateX(2px); }
 
 .menu-toggle {
-  display: none; margin-left: auto;
-  width: 48px; height: 48px; border: 0; background: transparent; cursor: pointer; border-radius: 50%;
+  display: none;
+  width: 44px; height: 44px; border: 0; background: transparent; cursor: pointer; border-radius: 8px;
   flex-direction: column; justify-content: center; align-items: center; gap: 5px;
 }
-.menu-toggle:hover { background: #f1f3f4; }
-.menu-toggle span { width: 20px; height: 2px; background: var(--ink-2); border-radius: 1px; transition: transform .2s, opacity .2s; }
+.menu-toggle span { width: 20px; height: 2px; background: #1f2937; border-radius: 1px; transition: transform .2s, opacity .2s; }
 .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -138,13 +153,21 @@ h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
 .mobile-nav {
   display: flex; flex-direction: column;
   padding-left: var(--gutter-l); padding-right: var(--gutter-r); padding-block: 8px 16px;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid rgba(17, 17, 17, 0.1);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
-.mobile-nav a { padding: 12px 0; font-size: 16px; line-height: 24px; color: var(--ink-2); }
+.mobile-nav a { padding: 12px 0; font-size: 17px; line-height: 1.5; font-weight: 500; color: #1f2937; }
 [hidden] { display: none !important; }
 
-@media (max-width: 760px) {
+/* arulhealth.com switches to its compact bar below 1024px: 26px logo, 20px
+   padding, 44px-tall button with 16px side padding, nav behind a menu button. */
+@media (max-width: 1023px) {
+  .header-inner { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+  .brand img { height: 26px; }
+  .brand-suffix { font-size: 20px; margin-bottom: -3px; }
   .site-nav { display: none; }
+  .header-actions { gap: 10px; }
+  .btn-try { min-height: 44px; padding: 12px 16px; font-size: 14px; gap: 6px; }
   .menu-toggle { display: flex; }
 }
 

@@ -13,12 +13,14 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&family=Google+Sans+Text:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&family=Google+Sans+Text:wght@400;500&family=Inter:wght@500&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip" href="#main">Jump to content</a>
 
+  <!-- Header: same bar as arulhealth.com (80px, 64px side padding, 36px logo,
+       Inter 17/500 links, "Try Arul →" button), with this site's menu items. -->
   <header class="site-header" data-header>
     <div class="header-inner">
       <a class="brand" href="/" aria-label="Arul Health.org home">
@@ -26,16 +28,17 @@
         <span class="brand-suffix">.org</span>
       </a>
       <nav class="site-nav" aria-label="Main navigation">
-        <ul>
-          <li><a href="#focus">Our focus</a></li>
-          <li><a href="https://arulhealth.com/stories">Our impact</a></li>
-          <li><a href="https://arulhealth.com/stories">Latest</a></li>
-          <li><a href="#resources">Resources</a></li>
-        </ul>
+        <a href="#focus">Our focus</a>
+        <a href="https://arulhealth.com/stories">Our impact</a>
+        <a href="https://arulhealth.com/stories">Latest</a>
+        <a href="#resources">Resources</a>
       </nav>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="header-actions">
+        <a class="btn-try" href="https://arulhealth.com/get-started"><span>Try Arul</span><span class="btn-arrow" aria-hidden="true">→</span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
     <nav class="mobile-nav" id="mobile-nav" aria-label="Main navigation (mobile)" hidden>
       <a href="#focus">Our focus</a>

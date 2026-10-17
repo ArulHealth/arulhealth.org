@@ -51,15 +51,6 @@
   sync();
 })();
 
-// Header shadow once the page has scrolled, like google.org.
-(function () {
-  const header = document.querySelector('[data-header]');
-  if (!header) return;
-  const update = () => header.classList.toggle('is-scrolled', window.scrollY > 4);
-  window.addEventListener('scroll', update, { passive: true });
-  update();
-})();
-
 // Mobile menu
 (function () {
   const toggle = document.querySelector('.menu-toggle');
