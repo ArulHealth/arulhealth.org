@@ -170,6 +170,15 @@ h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
   .btn-try { min-height: 44px; padding: 12px 16px; font-size: 14px; gap: 6px; }
   .menu-toggle { display: flex; }
 }
+/* Narrow phones: the ".org" suffix adds ~40px arulhealth.com's bar doesn't
+   carry, so trim the logo, button padding and menu button to fit 375px. */
+@media (max-width: 420px) {
+  .brand img { height: 24px; }
+  .brand-suffix { font-size: 18px; margin-bottom: -3px; }
+  .header-actions { gap: 6px; }
+  .btn-try { padding: 12px 14px; }
+  .menu-toggle { width: 36px; }
+}
 
 /* ---------- Hero ---------- */
 .hero { padding-top: 80px; }
