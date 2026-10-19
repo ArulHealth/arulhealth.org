@@ -14,7 +14,7 @@ styles.css       tokens + layout (measurements from a 1512px google.org capture)
 script.js        program rail (transform-driven endless slider: wheel, drag, arrows), mobile menu
 assets/          logo, favicon
 assets/photos/   card and section photos
-CNAME            custom domain for GitHub Pages
+firebase.json    Firebase Hosting config (site `arulhealth-org`; README, dotfiles and .github are not uploaded)
 ```
 
 ## Layout reference
@@ -47,4 +47,6 @@ python3 -m http.server 8080
 
 ## Deploy
 
-GitHub Pages serves the `main` branch root. `CNAME` points the Pages site at `arulhealth.org`; the domain's DNS needs `A` records at GitHub Pages' IPs (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153`) for the custom domain to resolve, then enable "Enforce HTTPS" in the repo's Pages settings.
+Firebase Hosting, site `arulhealth-org` in the `arul-health` project (`https://arulhealth-org.web.app`, custom domain `arulhealth.org`). `.github/workflows/deploy.yml` deploys on every push to `main`, and each same-repo PR gets a 7-day preview channel whose URL is commented on the PR. The workflow signs in to GCP with Workload Identity Federation (provider `github-arulhealth-org` in the `github` pool, service account `arulhealth-org-deployer`, role `roles/firebasehosting.admin`), so there is no key or repo secret.
+
+Manual deploy: `npx firebase-tools deploy --only hosting:arulhealth-org --project arul-health`.

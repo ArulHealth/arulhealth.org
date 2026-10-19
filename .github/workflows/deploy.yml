@@ -1,0 +1,84 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-${{ github.event.pull_request.number || github.ref }}
+  # Cancel stale PR previews, never a live deploy in flight.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  PROJECT_ID: arul-health
+  SITE_ID: arulhealth-org
+  FIREBASE_TOOLS: firebase-tools@15
+  WIF_PROVIDER: projects/100082303387/locations/global/workloadIdentityPools/github/providers/github-arulhealth-org
+  DEPLOY_SA: arulhealth-org-deployer@arul-health.iam.gserviceaccount.com
+
+jobs:
+  live:
+    name: Deploy to arulhealth.org
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.DEPLOY_SA }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npx -y ${{ env.FIREBASE_TOOLS }} deploy --only hosting:${{ env.SITE_ID }} --project ${{ env.PROJECT_ID }} --non-interactive
+
+  preview:
+    name: Preview channel
+    # Fork PRs get no OIDC token, so only same-repo branches can preview.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.DEPLOY_SA }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: deploy
+        # --no-authorized-domains: the site has no Firebase Auth, and the deployer can't edit it.
+        run: |
+          npx -y ${{ env.FIREBASE_TOOLS }} hosting:channel:deploy "pr-${{ github.event.pull_request.number }}" \
+            --only ${{ env.SITE_ID }} --project ${{ env.PROJECT_ID }} --expires 7d \
+            --no-authorized-domains --non-interactive --json > channel.json
+          url=$(jq -er '.result[env.SITE_ID].url' channel.json)
+          expires=$(jq -er '.result[env.SITE_ID].expireTime' channel.json)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "expires=$expires" >> "$GITHUB_OUTPUT"
+      - uses: actions/github-script@v7
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.url }}
+          PREVIEW_EXPIRES: ${{ steps.deploy.outputs.expires }}
+        with:
+          script: |
+            const marker = '<!-- firebase-preview -->';
+            const body = `${marker}\nPreview: ${process.env.PREVIEW_URL}\n\nCommit ${context.payload.pull_request.head.sha.slice(0, 7)}, expires ${process.env.PREVIEW_EXPIRES}.`;
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const mine = comments.find(c => c.body?.startsWith(marker));
+            if (mine) await github.rest.issues.updateComment({ owner, repo, comment_id: mine.id, body });
+            else await github.rest.issues.createComment({ owner, repo, issue_number, body });
