@@ -30,14 +30,15 @@ Measured from google.org at 1512px wide and reproduced here:
 | Statement | 36px / 44px, -0.25px tracking, ~700px measure |
 | Feature image | 1296 × 729 (the Arul Health brand image) |
 | Our focus | h2 48px / 56px; lede 28px / 36px; 3 columns, 64px gap, 3:4 images with 8px top radius; 28px titles, 16px `#5f6368` copy, "Learn more" link + chevron |
-| Resources | 502px image + 502px copy, 64px gap; h2 48px / 56px; 18px / 28px copy |
+| Our impact | h2 48px / 56px; lede 28px / 36px; four figures at 48px / 56px with 16px `#5f6368` labels (not on google.org's homepage; added so the "Our impact" nav link has an in-page target) |
+| Resources | 502px image (the arulhealth.com home page, 1812:1080) + 502px copy, 64px gap; h2 48px / 56px; 18px / 28px copy |
 | Footer | `#f8f9fa`; single row: logo + About Arul Health, Help, copyright (the link columns, Privacy and Terms were removed on request) |
 
 Google's blue (`#1a73e8`) is swapped for the violet in the Arul wordmark (`#8e4dff`); every other color is google.org's neutral palette.
 
 ## Photos
 
-`assets/photos/arul-health-brand.jpg`, `founding-treatment.jpg` and `launch-poster.jpg` are Arul's own. The eleven program and focus photos (`financial-aid`, `appeals`, `pediatric`, `mbc`, `peer-navigators`, `records`, `rides`, `trials`, `focus-access`, `focus-habits`, `focus-communities`) are **AI-generated placeholders** (Figma AI, 2026-10-16) chosen to avoid identifiable faces. Replace them with real program photography before this page is promoted; keep the same filenames and aspect ratios (1:1 and 3:2 for the rail, 3:4 for the focus cards) and nothing else needs to change.
+`assets/photos/arul-health-brand.jpg`, `arul-hero.jpg` (the arulhealth.com home page) and `founding-treatment.jpg` are Arul's own. The eleven program and focus photos (`financial-aid`, `appeals`, `pediatric`, `mbc`, `peer-navigators`, `records`, `rides`, `trials`, `focus-access`, `focus-habits`, `focus-communities`) are **AI-generated placeholders** (Figma AI, 2026-10-16) chosen to avoid identifiable faces. Replace them with real program photography before this page is promoted; keep the same filenames and aspect ratios (1:1 and 3:2 for the rail, 3:4 for the focus cards) and nothing else needs to change.
 
 ## Run locally
 
