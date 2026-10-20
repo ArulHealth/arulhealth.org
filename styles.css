@@ -302,7 +302,7 @@ h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
   justify-content: center; align-items: center;
   padding-top: 36px; padding-bottom: 36px;
 }
-.resources-media { aspect-ratio: 1812 / 1080; max-width: 100%; overflow: hidden; border-radius: 8px; background: #f6f4f9; }
+.resources-media { aspect-ratio: 1812 / 1066; max-width: 100%; overflow: hidden; border-radius: 8px; background: #f6f4f9; }
 .resources-media img { width: 100%; height: 100%; object-fit: cover; }
 .resources-copy h2 { max-width: 320px; }
 .resources-copy p { font-size: 18px; line-height: 28px; padding-top: 16px; max-width: 448px; text-wrap: pretty; }

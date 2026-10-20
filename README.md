@@ -31,7 +31,7 @@ Measured from google.org at 1512px wide and reproduced here:
 | Feature image | 1296 × 729 (the Arul Health brand image) |
 | Our focus | h2 48px / 56px; lede 28px / 36px; 3 columns, 64px gap, 3:4 images with 8px top radius; 28px titles, 16px `#5f6368` copy, "Learn more" link + chevron |
 | Our impact | h2 48px / 56px; lede 28px / 36px; four figures at 48px / 56px with 16px `#5f6368` labels (not on google.org's homepage; added so the "Our impact" nav link has an in-page target) |
-| Resources | 502px image (the arulhealth.com home page, 1812:1080) + 502px copy, 64px gap; h2 48px / 56px; 18px / 28px copy |
+| Resources | 502px image (the arulhealth.com home page, 1812:1066) + 502px copy, 64px gap; h2 48px / 56px; 18px / 28px copy |
 | Footer | `#f8f9fa`; single row: logo + About Arul Health, Help, copyright (the link columns, Privacy and Terms were removed on request) |
 
 Google's blue (`#1a73e8`) is swapped for the violet in the Arul wordmark (`#8e4dff`); every other color is google.org's neutral palette.
