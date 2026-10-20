@@ -48,6 +48,8 @@ python3 -m http.server 8080
 
 ## Deploy
 
+Every push to `main` deploys to Firebase Hosting via `.github/workflows/deploy.yml`. HTML is served `no-cache`; `styles.css` and `script.js` are referenced as `?v=__ASSET_VERSION__`, which the workflow replaces with the commit SHA, so browsers never pair fresh HTML with a stale cached stylesheet. Locally the placeholder is harmless.
+
 Firebase Hosting, site `arulhealth-org` in the `arul-health` project (`https://arulhealth-org.web.app`, custom domain `arulhealth.org`). `.github/workflows/deploy.yml` deploys on every push to `main`, and each same-repo PR gets a 7-day preview channel whose URL is commented on the PR. The workflow signs in to GCP with Workload Identity Federation (provider `github-arulhealth-org` in the `github` pool, service account `arulhealth-org-deployer`, role `roles/firebasehosting.admin`), so there is no key or repo secret.
 
 Manual deploy: `npx firebase-tools deploy --only hosting:arulhealth-org --project arul-health`.
