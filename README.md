@@ -45,8 +45,10 @@ Google's blue (`#1a73e8`) is swapped for the violet in the Arul wordmark (`#8e4d
 ## Run locally
 
 ```bash
-python3 -m http.server 8080
+python3 serve.py
 ```
+
+`serve.py` mimics Firebase Hosting's `cleanUrls`, so `/scholars` resolves to `scholars.html` the way it does in production. Plain `python3 -m http.server` works too but returns 404 for the clean menu links.
 
 ## Deploy
 
