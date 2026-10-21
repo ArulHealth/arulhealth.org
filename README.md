@@ -10,10 +10,12 @@ Plain HTML, CSS, and a few lines of JavaScript. No build step, no dependencies. 
 
 ```
 index.html       the page
+scholars.html    Arul Scholars (chapters & campus initiatives), served at /scholars via cleanUrls; linked from the header menu
 styles.css       tokens + layout (measurements from a 1512px google.org capture)
 script.js        program rail (transform-driven endless slider: wheel, drag, arrows), mobile menu
 assets/          logo, favicon
 assets/photos/   card and section photos
+assets/photos/scholars/  event photos for the Scholars page
 firebase.json    Firebase Hosting config (site `arulhealth-org`; README, dotfiles and .github are not uploaded)
 ```
 

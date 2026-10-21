@@ -163,6 +163,11 @@ h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
 .mobile-nav a { padding: 12px 0; font-size: 17px; line-height: 1.5; font-weight: 500; color: #1f2937; }
 [hidden] { display: none !important; }
 
+/* With four links the centered nav would run into the logo between 1024px
+   and 1199px, so let it sit in the flex flow there instead. */
+@media (max-width: 1199px) and (min-width: 1024px) {
+  .site-nav { position: static; transform: none; gap: 28px; }
+}
 /* arulhealth.com switches to its compact bar below 1024px: 26px logo, 20px
    padding, 44px-tall button with 16px side padding, nav behind a menu button. */
 @media (max-width: 1023px) {
