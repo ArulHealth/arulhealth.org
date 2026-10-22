@@ -21,13 +21,13 @@ firebase.json    Firebase Hosting config (site `arulhealth-org`; README, dotfile
 
 ## Article sheets
 
-Nothing on the home page sends visitors to arulhealth.com except **View resources** (and the resources image), which open `arulhealth.com/blog` in a new tab. Every other clickable item opens a full article in a bottom sheet:
+Only two things on the home page send visitors to arulhealth.com, both in a new tab: **Try Arul** (header) opens `arulhealth.com/get-started`, and **View resources** (and the resources image) opens `arulhealth.com/blog`. Every other clickable item opens a full article in a bottom sheet:
 
 | Trigger | Article id |
 |---|---|
 | The eight program cards | `clinical-trials`, `rides-and-lodging`, `financial-aid`, `denials-and-appeals`, `pediatric-cancer`, `metastatic-breast-cancer`, `peer-navigators`, `medical-records` |
 | The three focus cards | `access-to-care`, `healthy-habits`, `stronger-communities` |
-| "Try Arul" (header) | `get-started` (contact by email to support@arulhealth.com) |
+| "Up next" chain only | `get-started` (contact by email to support@arulhealth.com) |
 | Footer: About Arul Health, Help | `about`, `help` |
 
 How it works:
