@@ -28,7 +28,7 @@ Measured from google.org at 1512px wide and reproduced here:
 | Header | copied from arulhealth.com, not google.org: 80px translucent bar (20px backdrop blur, hairline rule), 64px side padding, 36px logo, Inter 17px/500 links centered on the bar, "Try Arul →" button (`#0B2A16` on `#CFFADF`, 12px radius, 10×20 padding) |
 | Content column | 1296px, 108px side margins |
 | Hero h1 | 60px / 72px, -0.5px tracking, centered, 80px above |
-| Program rail | 302.4px square cards on a 378px pitch; active card centered, dark text; landscape cards 302 × 202 vertically centered; 50px round arrows bottom right |
+| Program rail | 302.4px square cards on a 378px pitch; active card centered, dark text; landscape cards 302 × 202 vertically centered; portrait (2:3) cards 202 × 302 horizontally centered; 50px round arrows bottom right |
 | Statement | 36px / 44px, -0.25px tracking, ~700px measure |
 | Feature image | 1296 × 729 (the Arul Health brand image) |
 | Our focus | h2 48px / 56px; lede 28px / 36px; 3 columns, 64px gap, 3:4 images with 8px top radius; 28px titles, 16px `#5f6368` copy, "Learn more" link + chevron |
