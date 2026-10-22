@@ -174,7 +174,9 @@
   const ids = templates.map((t) => t.id.slice(6));
   const has = (id) => ids.includes(id);
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const CLOSE_MS = reduceMotion ? 0 : 440;
+  const OPEN_MS = reduceMotion ? 0 : 360;
+  const CLOSE_MS = reduceMotion ? 0 : 240;
+  const RISE = 56;   // px the sheet travels while it fades in/out
 
   const dialog = document.createElement('dialog');
   dialog.className = 'sheet-dialog';
@@ -193,6 +195,7 @@
     '</div>';
   document.body.appendChild(dialog);
   const sheet = dialog.querySelector('.sheet');
+  const scrim = dialog.querySelector('.sheet-scrim');
   const bar = dialog.querySelector('.sheet-bar');
   const kicker = dialog.querySelector('.sheet-kicker');
   const scroller = dialog.querySelector('.sheet-scroll');
@@ -202,6 +205,7 @@
   let opener = null;        // element to return focus to
   let pushed = false;       // we added a history entry for this sheet
   let closeTimer = 0;
+  let drag = null;          // active grab-bar drag
 
   function render(id) {
     const tpl = document.getElementById('sheet-' + id);
@@ -253,30 +257,51 @@
       document.documentElement.style.setProperty('--sbw', (sbw > 0 ? sbw : 0) + 'px');
       document.documentElement.classList.add('sheet-open');
       dialog.showModal();
-      // Commit the closed position before flipping to open, so the slide-up
-      // transition always runs (a double rAF can be skipped under load).
-      void sheet.offsetHeight;
-      dialog.classList.add('is-open');
-    } else if (!dialog.classList.contains('is-open')) {
-      // Re-opened while the close animation was still running: slide back up.
-      dialog.classList.add('is-open');
+    }
+    // Always animate in from the first keyframe, including when re-opened
+    // mid-close; any in-flight close animation is cancelled first.
+    stopAnimations();
+    sheet.style.transform = '';
+    if (!switching) {
+      scrim.animate([{ opacity: 0 }, { opacity: 1 }], { duration: OPEN_MS, easing: 'ease-out' });
+      sheet.animate(
+        [{ transform: 'translate3d(0,' + RISE + 'px,0)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+        { duration: OPEN_MS, easing: 'cubic-bezier(.2, .8, .2, 1)' }
+      );
     }
     scroller.focus({ preventScroll: true });
   }
 
+  function stopAnimations() {
+    sheet.getAnimations().forEach((a) => a.cancel());
+    scrim.getAnimations().forEach((a) => a.cancel());
+  }
+
   function finishClose() {
-    dialog.classList.remove('is-open', 'is-dragging');
-    // Jump to the current dragged position first, then let the transition
-    // carry the sheet the rest of the way down (no snap back to the top).
-    sheet.style.transform = '';
-    closeTimer = setTimeout(() => {
+    dialog.classList.remove('is-dragging');
+    current = null;
+    stopAnimations();
+    // Start from wherever the sheet is (it may have been dragged), then slide
+    // down a little and fade out; the dialog is closed when that finishes.
+    const from = sheet.style.transform || 'none';
+    const dy = parseFloat((from.match(/,\s*(-?[\d.]+)px/) || [])[1]) || 0;
+    scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: CLOSE_MS, easing: 'ease-in', fill: 'forwards' });
+    const out = sheet.animate(
+      [{ transform: 'translate3d(0,' + dy + 'px,0)', opacity: 1 }, { transform: 'translate3d(0,' + (dy + RISE) + 'px,0)', opacity: 0 }],
+      { duration: CLOSE_MS, easing: 'ease-in', fill: 'forwards' }
+    );
+    const done = () => {
+      if (current) return;   // re-opened in the meantime
+      stopAnimations();
+      sheet.style.transform = '';
       if (dialog.open) dialog.close();
       document.documentElement.classList.remove('sheet-open');
       scroller.replaceChildren();
       if (opener && opener.isConnected && typeof opener.focus === 'function') opener.focus({ preventScroll: true });
       opener = null;
-    }, CLOSE_MS);
-    current = null;
+    };
+    out.onfinish = done;
+    closeTimer = setTimeout(() => { if (!current && dialog.open) done(); }, CLOSE_MS + 80);
   }
 
   // Closing from the UI walks back the history entry we pushed, so the Back
@@ -319,7 +344,6 @@
   scroller.addEventListener('scroll', onScroll, { passive: true });
 
   // Swipe down on the grab bar to dismiss.
-  let drag = null;
   bar.addEventListener('pointerdown', (e) => {
     if (e.button !== 0 || e.target.closest('button')) return;
     drag = { id: e.pointerId, y: e.clientY, dy: 0, t: performance.now() };
@@ -336,8 +360,12 @@
     const d = drag; drag = null;
     dialog.classList.remove('is-dragging');
     const fast = d.dy / Math.max(1, performance.now() - d.t) > 0.6;
-    if (d.dy > sheet.offsetHeight * 0.25 || (fast && d.dy > 40)) close();
-    else sheet.style.transform = '';
+    if (d.dy > sheet.offsetHeight * 0.25 || (fast && d.dy > 40)) { close(); return; }
+    sheet.animate(
+      [{ transform: 'translate3d(0,' + d.dy + 'px,0)' }, { transform: 'none' }],
+      { duration: reduceMotion ? 0 : 220, easing: 'cubic-bezier(.2, .8, .2, 1)' }
+    );
+    sheet.style.transform = '';
   }
   bar.addEventListener('pointerup', endDrag);
   bar.addEventListener('pointercancel', endDrag);
