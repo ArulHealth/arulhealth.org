@@ -40,7 +40,7 @@ Google's blue (`#1a73e8`) is swapped for the violet in the Arul wordmark (`#8e4d
 
 ## Photos
 
-`assets/photos/arul-health-brand.jpg`, `arul-hero.jpg` (the arulhealth.com home page) and `founding-treatment.jpg` are Arul's own. `appeals.jpg`, `financial-aid.jpg` and `pediatric.jpg` are stock photos supplied on 2026-10-22. The eight program and focus photos (`mbc`, `peer-navigators`, `records`, `rides`, `trials`, `focus-access`, `focus-habits`, `focus-communities`) are **AI-generated placeholders** (Figma AI, 2026-10-16) chosen to avoid identifiable faces. Replace them with real program photography before this page is promoted; keep the same filenames and aspect ratios (1:1 and 3:2 for the rail, 3:4 for the focus cards) and nothing else needs to change.
+`assets/photos/arul-health-brand.jpg`, `arul-hero.jpg` (the arulhealth.com home page) and `founding-treatment.jpg` are Arul's own. `appeals.jpg`, `financial-aid.jpg`, `pediatric.jpg` and `mbc.jpg` are stock photos supplied on 2026-10-22. The seven program and focus photos (`peer-navigators`, `records`, `rides`, `trials`, `focus-access`, `focus-habits`, `focus-communities`) are **AI-generated placeholders** (Figma AI, 2026-10-16) chosen to avoid identifiable faces. Replace them with real program photography before this page is promoted; keep the same filenames and aspect ratios (1:1 and 3:2 for the rail, 3:4 for the focus cards) and nothing else needs to change.
 
 ## Run locally
 
