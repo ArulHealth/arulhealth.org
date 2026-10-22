@@ -21,7 +21,7 @@ firebase.json    Firebase Hosting config (site `arulhealth-org`; README, dotfile
 
 ## Article sheets
 
-Only two things on the home page send visitors to arulhealth.com, both in a new tab: **Try Arul** (header) opens `arulhealth.com/get-started`, and **View resources** (and the resources image) opens `arulhealth.com/blog`. Every other clickable item opens a full article in a bottom sheet. The articles are written as a record of work done (past tense, impact first); partner nonprofits CNCF and Project Life are named, pharmaceutical sponsors and investors are not:
+Only two things on the home page send visitors to arulhealth.com, both in a new tab: **Try Arul** (header) opens `arulhealth.com/get-started`, and **View resources** (and the resources image) opens `arulhealth.com/blog`. Every other clickable item opens a full article in a bottom sheet. The articles are written as a record of work done (past tense, impact first); Project Life is named with its agreement; other partners, pharmaceutical sponsors and investors are not:
 
 | Trigger | Article id |
 |---|---|
