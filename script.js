@@ -248,16 +248,26 @@
     }
     if (!switching) {
       opener = opts.opener || document.activeElement;
+      // Reserve the scrollbar's width so the page doesn't shift when it locks.
+      const sbw = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.setProperty('--sbw', (sbw > 0 ? sbw : 0) + 'px');
       document.documentElement.classList.add('sheet-open');
       dialog.showModal();
-      // Next frame so the slide-up transition runs from the closed position.
-      requestAnimationFrame(() => requestAnimationFrame(() => dialog.classList.add('is-open')));
+      // Commit the closed position before flipping to open, so the slide-up
+      // transition always runs (a double rAF can be skipped under load).
+      void sheet.offsetHeight;
+      dialog.classList.add('is-open');
+    } else if (!dialog.classList.contains('is-open')) {
+      // Re-opened while the close animation was still running: slide back up.
+      dialog.classList.add('is-open');
     }
     scroller.focus({ preventScroll: true });
   }
 
   function finishClose() {
     dialog.classList.remove('is-open', 'is-dragging');
+    // Jump to the current dragged position first, then let the transition
+    // carry the sheet the rest of the way down (no snap back to the top).
     sheet.style.transform = '';
     closeTimer = setTimeout(() => {
       if (dialog.open) dialog.close();
@@ -319,7 +329,7 @@
   bar.addEventListener('pointermove', (e) => {
     if (!drag || e.pointerId !== drag.id) return;
     drag.dy = Math.max(0, e.clientY - drag.y);
-    sheet.style.transform = 'translate(-50%,' + drag.dy + 'px)';
+    sheet.style.transform = 'translate3d(0,' + drag.dy + 'px,0)';
   });
   function endDrag(e) {
     if (!drag || e.pointerId !== drag.id) return;
