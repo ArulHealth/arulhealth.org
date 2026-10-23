@@ -186,7 +186,7 @@
       '<div class="sheet-bar">' +
         '<span class="sheet-handle" aria-hidden="true"></span>' +
         '<p class="sheet-kicker" aria-hidden="true"></p>' +
-        '<button class="sheet-close" type="button" aria-label="Close article" data-sheet-close>' +
+        '<button class="sheet-close" type="button" aria-label="Close article" data-sheet-close autofocus>' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>' +
         '</button>' +
         '<span class="sheet-progress" aria-hidden="true"></span>' +
@@ -233,7 +233,15 @@
       more.querySelector('.t').textContent = (na.querySelector('h2') || {}).textContent || '';
       scroller.appendChild(more);
     }
+    resetScroll();
+  }
+
+  // Every article opens at its top. Reset after layout and again after the
+  // open animation, in case focus or late-loading images moved the scroller.
+  function resetScroll() {
+    scroller.style.scrollBehavior = 'auto';
     scroller.scrollTop = 0;
+    requestAnimationFrame(() => { scroller.scrollTop = 0; scroller.style.scrollBehavior = ''; onScroll(); });
     onScroll();
   }
 
@@ -264,11 +272,13 @@
     sheet.style.transform = '';
     if (!switching) {
       scrim.animate([{ opacity: 0 }, { opacity: 1 }], { duration: OPEN_MS, easing: 'ease-out' });
-      sheet.animate(
+      const inAnim = sheet.animate(
         [{ transform: 'translate3d(0,' + RISE + 'px,0)', opacity: 0 }, { transform: 'none', opacity: 1 }],
         { duration: OPEN_MS, easing: 'cubic-bezier(.2, .8, .2, 1)' }
       );
+      inAnim.onfinish = () => { if (current) resetScroll(); };
     }
+    resetScroll();
     scroller.focus({ preventScroll: true });
   }
 
