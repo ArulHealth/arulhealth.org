@@ -12,12 +12,33 @@ Plain HTML, CSS, and a few lines of JavaScript. No build step, no dependencies. 
 index.html       the page
 scholars.html    Arul Scholars (chapters & campus initiatives), served at /scholars via cleanUrls; linked from the header menu
 styles.css       tokens + layout (measurements from a 1512px google.org capture)
-script.js        program rail (transform-driven endless slider: wheel, drag, arrows), mobile menu
+script.js        program rail (transform-driven endless slider: wheel, drag, arrows), mobile menu, article sheets
 assets/          logo, favicon
 assets/photos/   card and section photos
 assets/photos/scholars/  event photos for the Scholars page
 firebase.json    Firebase Hosting config (site `arulhealth-org`; README, dotfiles and .github are not uploaded)
 ```
+
+## Article sheets
+
+Only two things on the home page send visitors to arulhealth.com, both in a new tab: **Try Arul** (header) opens `arulhealth.com/get-started`, and **View resources** (and the resources image) opens `arulhealth.com/blog`. Every other clickable item opens a full article in a bottom sheet. The articles are written as a record of work done (past tense, impact first); Project Life is named with its agreement; other partners, pharmaceutical sponsors and investors are not:
+
+| Trigger | Article id |
+|---|---|
+| The eight program cards | `clinical-trials`, `rides-and-lodging`, `financial-aid`, `denials-and-appeals`, `pediatric-cancer`, `metastatic-breast-cancer`, `peer-navigators`, `medical-records` |
+| The three focus cards | `access-to-care`, `healthy-habits`, `stronger-communities` |
+| "Up next" chain only | `get-started` (contact by email to support@arulhealth.com) |
+| Footer: About Arul Health, Help | `about`, `help` |
+
+How it works:
+
+- Each article is a `<template id="sheet-<id>">` at the bottom of `index.html`. Any element with `data-sheet="<id>"` opens it, including links inside other articles.
+- The sheet is a native `<dialog>` (focus trap, Esc). It slides up to ~90% of the viewport and closes with the X, Esc, a click on the dimmed page, a swipe down on the grab bar, or the Back button.
+- The open article is in the URL hash, so `arulhealth.org/#financial-aid` opens that article directly.
+- Template order is the "Up next" order at the end of each article; `data-next` on an `<article>` overrides it.
+- To add an article: add a template, then put `data-sheet="<id>"` on the trigger. No script change needed.
+
+The articles were written on 2026-10-22 from the Arul Health knowledge vault. They name no partners or investors on purpose; add one only with that organization's sign-off.
 
 ## Layout reference
 
