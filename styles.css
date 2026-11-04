@@ -1,12 +1,16 @@
-/* arulhealth.org — a close copy of google.org's homepage grid, measured from a
-   1512px capture: 64px header, 108px side margins (1296 content), 60/72 hero,
-   302px program cards on a 378px pitch, 36/44 statement, 3-column 3:4 focus
-   cards, a 502/502 resources split, and a #f8f9fa footer. Google's blue link
-   color is replaced by the violet from the Arul wordmark. */
+/* arulhealth.org — header, footer and article sheets follow google.org's
+   homepage grid (64px header, 108px side margins, 1296 content, #f8f9fa
+   footer). The home page sections follow bostonjcc.org/who-we-are: a split
+   hero with the photo fading into a tint, alternating photo / copy rows with
+   an offset color block behind each photo, a four-up values row, and serif
+   (Lora) headings over a sans body. Accent is the violet from the Arul
+   wordmark. */
 
 :root {
   --bg: #ffffff;
   --bg-footer: #f8f9fa;
+  --bg-tint: #f5f2fb;
+  --heading: #1d1340;
   --ink: #202124;
   --ink-2: #5f6368;
   --ink-3: #80868b;
@@ -18,6 +22,7 @@
 
   --font-display: "Google Sans", "Google Sans Text", Arial, Helvetica, sans-serif;
   --font-text: "Google Sans Text", "Google Sans", Arial, Helvetica, sans-serif;
+  --font-serif: "Lora", Georgia, "Times New Roman", serif;
 
   --content: 1296px;
   --margin: 108px;
@@ -73,12 +78,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .skip:focus { top: 12px; }
 
 /* ---------- Type ---------- */
-h1 { font-family: var(--font-display); font-size: 60px; line-height: 72px; letter-spacing: -0.5px; text-wrap: balance; }
-h2 { font-family: var(--font-display); font-size: 48px; line-height: 56px; letter-spacing: -0.5px; text-wrap: balance; }
-h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
-.lede { font-family: var(--font-display); font-size: 28px; line-height: 36px; text-wrap: pretty; }
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 700; color: var(--heading); text-wrap: balance; }
+h1 { font-size: 60px; line-height: 72px; letter-spacing: -0.5px; }
+h2 { font-size: 44px; line-height: 54px; letter-spacing: -0.25px; }
+h3 { font-size: 28px; line-height: 36px; }
+.lede { font-size: 20px; line-height: 30px; text-wrap: pretty; }
 .eyebrow { font-size: 10px; line-height: 16px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink-3); }
-.card-title { font-size: 16px; line-height: 24px; color: var(--ink-3); }
 
 .text-link {
   display: inline-flex; align-items: center; gap: 8px;
@@ -92,7 +97,7 @@ h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
   h1 { font-size: 36px; line-height: 44px; letter-spacing: -0.25px; }
   h2 { font-size: 32px; line-height: 40px; letter-spacing: -0.25px; }
   h3 { font-size: 24px; line-height: 32px; }
-  .lede { font-size: 20px; line-height: 28px; }
+  .lede { font-size: 18px; line-height: 28px; }
 }
 
 /* ---------- Header: copied from arulhealth.com ----------
@@ -163,10 +168,10 @@ h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
 .mobile-nav a { padding: 12px 0; font-size: 17px; line-height: 1.5; font-weight: 500; color: #1f2937; }
 [hidden] { display: none !important; }
 
-/* With four links the centered nav would run into the logo between 1024px
-   and 1199px, so let it sit in the flex flow there instead. */
-@media (max-width: 1199px) and (min-width: 1024px) {
-  .site-nav { position: static; transform: none; gap: 28px; }
+/* With five links the centered nav would run into the logo between 1024px
+   and 1279px, so let it sit in the flex flow there instead. */
+@media (max-width: 1279px) and (min-width: 1024px) {
+  .site-nav { position: static; transform: none; gap: 24px; }
 }
 /* arulhealth.com switches to its compact bar below 1024px: 26px logo, 20px
    padding, 44px-tall button with 16px side padding, nav behind a menu button. */
@@ -189,136 +194,114 @@ h3 { font-family: var(--font-display); font-size: 28px; line-height: 36px; }
   .menu-toggle { width: 36px; }
 }
 
-/* ---------- Hero ---------- */
-.hero { padding-top: 80px; }
-.hero-text { padding-left: var(--gutter-l); padding-right: var(--gutter-r); text-align: center; }
-.hero-text h1 { max-width: 760px; margin-inline: auto; }
-@media (max-width: 760px) { .hero { padding-top: 48px; } }
-
-/* ---------- Program rail: 302.4px cards, 378px pitch, active card centered.
-   The track is moved with a transform by script.js (see there for why), so it
-   never scrolls natively; the viewport clips it and vertical touch scrolling
-   still reaches the page. ---------- */
-.carousel { padding-top: 80px; overflow: hidden; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
-.carousel.is-dragging { cursor: grabbing; }
-.carousel.is-dragging a { pointer-events: none; }
-.track {
-  display: flex; gap: var(--card-gap);
-  width: max-content;
-  will-change: transform;
+/* ---------- Hero: copy left, photo right fading into the tint ---------- */
+.hero { position: relative; background: var(--bg-tint); overflow: hidden; }
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: calc(var(--content) + 2 * var(--margin)); margin-inline: auto;
+  padding: 112px max(var(--margin), var(--gutter-r)) 120px max(var(--margin), var(--gutter-l));
+  min-height: 600px; display: flex; align-items: center;
 }
-.card { flex: 0 0 var(--card); }
-.card a { display: block; }
-.card .media {
-  width: var(--card); height: var(--card); max-width: 100%;
-  display: flex; align-items: center; overflow: hidden;
+.hero-copy { max-width: 520px; }
+.hero-copy h1 { font-size: 52px; line-height: 60px; }
+.hero-lede { margin-top: 28px; font-family: var(--font-serif); font-weight: 600; font-size: 24px; line-height: 34px; color: var(--heading); text-wrap: pretty; }
+.hero-body { margin-top: 16px; font-size: 17px; line-height: 28px; color: var(--ink-2); text-wrap: pretty; }
+.hero-media { position: absolute; top: 0; right: 0; bottom: 0; width: 58%; }
+.hero-media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 40% 50%;
+  -webkit-mask-image: radial-gradient(ellipse 100% 130% at 100% 50%, #000 62%, transparent 82%);
+  mask-image: radial-gradient(ellipse 100% 130% at 100% 50%, #000 62%, transparent 82%);
 }
-.card .media img { width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; }
-.card.is-landscape .media img { height: calc(var(--card) * 2 / 3); }
-.card.is-portrait .media { justify-content: center; }
-.card.is-portrait .media img { width: calc(var(--card) * 2 / 3); }
-.card .eyebrow { padding-top: 24px; }
-.card .card-title { padding-top: 8px; }
-.card.is-active .eyebrow { color: var(--accent); }
-.card.is-active .card-title { color: var(--ink); }
-.card a:hover .card-title { text-decoration: underline; text-underline-offset: 3px; }
-
-.carousel-controls {
-  display: flex; justify-content: flex-end; gap: 4px;
-  padding: 16px 16px 8px;
-}
-.arrow {
-  width: 50px; height: 50px; border-radius: 50%;
-  border: 1px solid transparent; background: transparent; color: var(--accent);
-  display: grid; place-items: center; cursor: pointer;
-  transition: background .15s, opacity .15s;
-}
-.arrow svg { width: 24px; height: 24px; fill: currentColor; }
-.arrow:hover { background: var(--accent-soft); }
-.arrow:disabled { opacity: .38; cursor: default; background: transparent; }
-
-@media (max-width: 760px) {
-  :root { --card: min(302.4px, calc(100vw - 96px)); --card-gap: 32px; }
-  .carousel { padding-top: 48px; }
-}
-
-/* ---------- Statement (36/44, 694px measure, 116px above) ---------- */
-.mission { padding-top: 116px; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
-.statement {
-  font-family: var(--font-display);
-  font-size: 36px; line-height: 44px; letter-spacing: -0.25px;
-  text-align: center; max-width: 720px; margin-inline: auto; padding-top: 16px;
-  text-wrap: balance;
-}
-@media (max-width: 760px) {
-  .mission { padding-top: 64px; }
-  .statement { font-size: 24px; line-height: 32px; letter-spacing: 0; }
-}
-
-/* ---------- Feature image (1296 x 729) ---------- */
-.feature { padding-top: 180px; }
-.feature-media { width: 100%; aspect-ratio: 1296 / 729; max-width: 100%; overflow: hidden; }
-.feature-media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-@media (max-width: 760px) { .feature { padding-top: 64px; } .feature-media { aspect-ratio: 4 / 3; } }
-
-/* ---------- Our impact ---------- */
-.impact { padding-top: 187px; }
-.impact .wrap { padding-top: 36px; padding-bottom: 36px; }
-.impact-head { display: grid; gap: 16px; text-align: center; max-width: 842px; margin-inline: auto; }
-.stats {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 64px;
-  margin-top: 80px;
-}
-.stats li { min-width: 0; }
-.stat-number {
-  font-family: var(--font-display);
-  font-size: 48px; line-height: 56px; letter-spacing: -0.5px;
-  font-variant-numeric: tabular-nums;
-}
-.stat-label { padding-top: 8px; color: var(--ink-2); letter-spacing: 0.1px; text-wrap: pretty; }
-.impact-note { margin-top: 48px; text-align: center; font-size: 14px; line-height: 20px; color: var(--ink-3); }
-@media (max-width: 1000px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; } }
-@media (max-width: 760px) {
-  .impact { padding-top: 80px; }
-  .stats { grid-template-columns: 1fr; gap: 32px; margin-top: 48px; }
-  .stat-number { font-size: 36px; line-height: 44px; }
-}
-
-/* ---------- Our focus ---------- */
-.focus { padding-top: 187px; }
-.focus .wrap { padding-top: 36px; padding-bottom: 36px; }
-.focus-head { display: grid; gap: 16px; text-align: center; max-width: 842px; margin-inline: auto; }
-.focus-grid {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 64px;
-  margin-top: 80px;
-}
-.focus-card { display: block; border-radius: 8px; }
-.focus-media { aspect-ratio: 389.33 / 518.44; max-width: 100%; overflow: hidden; border-radius: 8px 8px 0 0; }
-.focus-media img { width: 100%; height: 100%; object-fit: cover; }
-.focus-body { padding: 24px 24px 32px; }
-.focus-body p { padding-top: 8px; color: var(--ink-2); letter-spacing: 0.1px; text-wrap: pretty; }
-.focus-body .text-link { margin-top: 15px; }
-.focus-card:hover h3 { text-decoration: underline; text-underline-offset: 4px; }
-@media (max-width: 1000px) { .focus-grid { grid-template-columns: 1fr; gap: 48px; max-width: 520px; margin-inline: auto; } }
-@media (max-width: 760px) { .focus { padding-top: 80px; } .focus-grid { margin-top: 48px; } }
-
-/* ---------- Resources (502 / 502 split, centered in 1126) ---------- */
-.resources { padding-top: 180px; padding-bottom: 180px; }
-.resources-inner {
-  display: grid; grid-template-columns: minmax(0, 502px) minmax(0, 502px); gap: 64px;
-  justify-content: center; align-items: center;
-  padding-top: 36px; padding-bottom: 36px;
-}
-.resources-media { aspect-ratio: 1812 / 1066; max-width: 100%; overflow: hidden; border-radius: 8px; background: #f6f4f9; }
-.resources-media img { width: 100%; height: 100%; object-fit: cover; }
-.resources-copy h2 { max-width: 320px; }
-.resources-copy p { font-size: 18px; line-height: 28px; padding-top: 16px; max-width: 448px; text-wrap: pretty; }
-.resources-copy .text-link { margin-top: 24px; }
+@media (max-width: 1100px) { .hero-inner { padding-left: var(--gutter-l); padding-right: var(--gutter-r); } }
 @media (max-width: 900px) {
-  .resources { padding-top: 80px; padding-bottom: 80px; }
-  .resources-inner { grid-template-columns: 1fr; gap: 32px; }
-  .resources-copy h2 { max-width: none; }
+  .hero-inner { min-height: 0; padding-top: 48px; padding-bottom: 32px; }
+  .hero-copy { max-width: none; }
+  .hero-copy h1 { font-size: 38px; line-height: 46px; }
+  .hero-lede { font-size: 20px; line-height: 30px; margin-top: 20px; }
+  .hero-media { position: relative; width: 100%; aspect-ratio: 16 / 10; }
+  .hero-media img { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 28%); mask-image: linear-gradient(to bottom, transparent 0, #000 28%); }
 }
+
+/* ---------- Section heads ---------- */
+.section-head { display: grid; gap: 16px; text-align: center; max-width: 760px; margin-inline: auto; }
+.section-head .lede { color: var(--ink-2); }
+
+/* ---------- Photo / copy rows: each photo sits on a color block offset up and
+   out, and the rows alternate sides ---------- */
+.focus { padding-top: 136px; }
+.feature-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 96px; align-items: center;
+  margin-top: 112px;
+}
+.feature-row.is-flipped .framed { order: 2; }
+.framed { position: relative; display: block; margin: 32px 0 0 32px; }
+.framed::before {
+  content: ""; position: absolute; inset: -32px 32px 32px -32px; border-radius: 4px;
+  background: var(--frame, var(--accent));
+}
+.feature-row.is-flipped .framed { margin: 32px 32px 0 0; }
+.feature-row.is-flipped .framed::before { inset: -32px -32px 32px 32px; }
+.framed img { position: relative; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 4px; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.framed.is-wide img { aspect-ratio: 1812 / 1066; }
+.framed:hover img { transform: translateY(-4px); }
+.frame-violet { --frame: linear-gradient(135deg, #5b1fc7, #b07cff); }
+.frame-green { --frame: linear-gradient(135deg, #0b2a16, #3f9a62); }
+.frame-teal { --frame: linear-gradient(135deg, #0d4f5c, #2fb3b0); }
+.feature-copy { max-width: 480px; }
+.feature-copy h3 { font-size: 36px; line-height: 44px; }
+.tagline { margin-top: 16px; font-size: 13px; line-height: 20px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--heading); }
+.feature-copy p:not(.tagline) { margin-top: 12px; font-size: 18px; line-height: 28px; color: var(--ink-2); text-wrap: pretty; }
+.feature-copy h2 + p { margin-top: 20px; }
+.feature-copy .text-link { margin-top: 24px; }
+@media (max-width: 900px) {
+  .focus { padding-top: 80px; }
+  .feature-row { grid-template-columns: 1fr; gap: 40px; margin-top: 64px; }
+  .feature-row.is-flipped .framed { order: 0; margin: 20px 0 0 20px; }
+  .framed { margin: 20px 0 0 20px; max-width: 520px; }
+  .framed::before, .feature-row.is-flipped .framed::before { inset: -20px 20px 20px -20px; }
+  .feature-copy h3 { font-size: 30px; line-height: 38px; }
+}
+
+/* ---------- What we believe ---------- */
+.values { padding-top: 160px; }
+.values h2 { text-align: center; }
+.values-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px; margin-top: 64px; }
+.values-grid li { border-top: 3px solid var(--accent); padding-top: 24px; }
+.values-grid h3 { font-size: 24px; line-height: 32px; }
+.values-grid p { margin-top: 12px; color: var(--ink-2); text-wrap: pretty; }
+@media (max-width: 1000px) { .values-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .values { padding-top: 96px; } }
+@media (max-width: 560px) { .values-grid { grid-template-columns: 1fr; gap: 32px; margin-top: 40px; } }
+
+/* ---------- Our impact: figures on a tinted band ---------- */
+.impact { margin-top: 160px; padding: 112px 0; background: var(--bg-tint); }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px; margin-top: 64px; }
+.stats li { min-width: 0; }
+.stat-number { font-family: var(--font-serif); font-weight: 700; font-size: 48px; line-height: 56px; color: var(--heading); font-variant-numeric: tabular-nums; }
+.stat-label { padding-top: 8px; color: var(--ink-2); text-wrap: pretty; }
+.impact-note { margin-top: 48px; text-align: center; font-size: 14px; line-height: 20px; color: var(--ink-3); }
+@media (max-width: 1000px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .impact { margin-top: 96px; padding: 72px 0; } }
+@media (max-width: 560px) { .stats { grid-template-columns: 1fr; gap: 32px; margin-top: 40px; } .stat-number { font-size: 40px; line-height: 48px; } }
+
+/* ---------- Our work: the program articles as a 4-up grid ---------- */
+.work { padding-top: 160px; }
+.work-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px 32px; margin-top: 64px; }
+.work-card { display: block; }
+.work-media { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 4px; background: var(--bg-tint); }
+.work-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.work-card:hover .work-media img { transform: scale(1.04); }
+.work-card .eyebrow { padding-top: 20px; font-size: 12px; font-weight: 500; letter-spacing: 1px; color: var(--accent); }
+.work-title { padding-top: 6px; font-family: var(--font-serif); font-weight: 600; font-size: 19px; line-height: 27px; color: var(--heading); text-wrap: pretty; }
+.work-card:hover .work-title { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 1000px) { .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .work { padding-top: 96px; } }
+@media (max-width: 560px) { .work-grid { grid-template-columns: 1fr; gap: 40px; margin-top: 40px; } }
+
+/* ---------- Our story + resources ---------- */
+.story { padding-top: 48px; }
+.resources { padding-bottom: 160px; }
+@media (max-width: 900px) { .story { padding-top: 32px; } .resources { padding-bottom: 96px; } }
 
 /* ---------- Footer (#f8f9fa, 108px margins, 3 columns / 40px gap) ---------- */
 .site-footer {
@@ -491,11 +474,6 @@ html.sheet-open body { padding-right: var(--sbw, 0px); }
 }
 
 /* Clickable items read as clickable */
-.resources-media { display: block; transition: transform .3s ease, box-shadow .3s ease; }
-a.resources-media:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(32, 33, 36, 0.16); }
-.card .media img, .focus-media img { transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
-.card a:hover .media img, .focus-card:hover .focus-media img { transform: scale(1.04); }
-.card.is-landscape a:hover .media img, .card.is-portrait a:hover .media img { transform: scale(1.04); }
 .footer-bottom button.link { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
 .footer-bottom button.link:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .btn-try { border: 0; cursor: pointer; font-family: inherit; }
