@@ -12,12 +12,6 @@
   nav.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
 })();
 
-// Footer year
-(function () {
-  const y = document.getElementById('year');
-  if (y) y.textContent = String(new Date().getFullYear());
-})();
-
 // Article sheets. Any element with data-sheet="<id>" opens the article kept in
 // <template id="sheet-<id>"> in a bottom sheet. The sheet is a native <dialog>
 // (top layer, focus trap, Esc); it slides up over ~90% of the viewport and

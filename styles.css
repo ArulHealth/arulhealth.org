@@ -124,8 +124,6 @@ h3 { font-size: 28px; line-height: 36px; }
    ".org" (Google Sans 500, asc/desc ~0.94em/0.29em) is pulled down so both
    baselines meet: (size - asc + desc)/2 - 36*5/205. */
 .brand-suffix { font-family: var(--font-display); font-weight: 500; font-size: 24px; line-height: 1; color: var(--ink); margin-bottom: -3px; }
-.brand-small { align-items: center; }
-.brand-small img { height: 24px; }
 
 /* Centered on the bar itself (space-between would offset it by the
    difference between the logo and button widths). */
@@ -265,42 +263,42 @@ h3 { font-size: 28px; line-height: 36px; }
 /* ---------- What we believe ---------- */
 .values { padding-top: 160px; }
 .values h2 { text-align: center; }
-.values-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px; margin-top: 64px; }
-.values-grid li { border-top: 3px solid var(--accent); padding-top: 24px; }
-.values-grid h3 { font-size: 24px; line-height: 32px; }
-.values-grid p { margin-top: 12px; color: var(--ink-2); text-wrap: pretty; }
-@media (max-width: 1000px) { .values-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 900px) { .values { padding-top: 96px; } }
-@media (max-width: 560px) { .values-grid { grid-template-columns: 1fr; gap: 32px; margin-top: 40px; } }
-
-/* ---------- Our impact: figures on a tinted band ---------- */
-.impact { margin-top: 160px; padding: 112px 0; background: var(--bg-tint); }
-.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px; margin-top: 64px; }
-.stats li { min-width: 0; }
-.stat-number { font-family: var(--font-serif); font-weight: 700; font-size: 48px; line-height: 56px; color: var(--heading); font-variant-numeric: tabular-nums; }
-.stat-label { padding-top: 8px; color: var(--ink-2); text-wrap: pretty; }
-.impact-note { margin-top: 48px; text-align: center; font-size: 14px; line-height: 20px; color: var(--ink-3); }
-@media (max-width: 1000px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 900px) { .impact { margin-top: 96px; padding: 72px 0; } }
-@media (max-width: 560px) { .stats { grid-template-columns: 1fr; gap: 32px; margin-top: 40px; } .stat-number { font-size: 40px; line-height: 48px; } }
-
-/* ---------- Our work: the program articles as a 4-up grid ---------- */
-.work { padding-top: 160px; }
-.work-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px 32px; margin-top: 64px; }
-.work-card { display: block; }
-.work-media { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 4px; background: var(--bg-tint); }
-.work-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
-.work-card:hover .work-media img { transform: scale(1.04); }
-.work-card .eyebrow { padding-top: 20px; font-size: 12px; font-weight: 500; letter-spacing: 1px; color: var(--accent); }
-.work-title { padding-top: 6px; font-family: var(--font-serif); font-weight: 600; font-size: 19px; line-height: 27px; color: var(--heading); text-wrap: pretty; }
-.work-card:hover .work-title { text-decoration: underline; text-underline-offset: 3px; }
-@media (max-width: 1000px) { .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 900px) { .work { padding-top: 96px; } }
-@media (max-width: 560px) { .work-grid { grid-template-columns: 1fr; gap: 40px; margin-top: 40px; } }
+/* Partner logos: grayscale, equal height, centered in four columns */
+.logo-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px; align-items: center; margin-top: 56px; }
+.logo-row li { display: flex; justify-content: center; }
+.logo-row img { width: 100%; max-width: 220px; height: 64px; object-fit: contain; filter: grayscale(1); opacity: .7; transition: opacity .2s, filter .2s; }
+.logo-row li:hover img { filter: none; opacity: 1; }
+.logo-row .is-larger img { max-width: 280px; height: 84px; }
+/* "and more..." sits below the row, centered under the last column */
+.logo-more { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px; margin-top: 40px; font-size: 14px; line-height: 20px; color: var(--ink-3); font-style: italic; }
+.logo-more span { grid-column: 4; text-align: center; }
+@media (max-width: 1000px) { .logo-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 64px; } .logo-more { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 32px; } .logo-more span { grid-column: 2; } }
+@media (max-width: 560px) { .logo-row { gap: 28px; margin-top: 40px; } .logo-row img { height: 48px; } .logo-row .is-larger img { height: 60px; } }
 
 /* ---------- Our story + resources ---------- */
 .story { padding-top: 48px; }
 .resources { padding-bottom: 160px; }
+
+/* ---------- Join our email list ---------- */
+.signup { background: var(--bg-tint); }
+.signup-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px 48px; flex-wrap: wrap; padding-top: 40px; padding-bottom: 40px; }
+.signup-copy h2 { font-size: 22px; line-height: 30px; }
+.signup-copy p { margin-top: 4px; color: var(--ink-2); max-width: 36ch; }
+.signup-form { display: flex; flex-wrap: wrap; gap: 12px; flex: 1 1 520px; justify-content: flex-end; }
+.signup-form input {
+  flex: 1 1 180px; min-width: 0; min-height: 44px; padding: 10px 14px;
+  font: inherit; font-size: 15px; color: var(--ink);
+  background: var(--bg); border: 1px solid var(--rule); border-radius: 8px;
+}
+.signup-form input::placeholder { color: var(--ink-3); }
+.signup-form input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.signup-form .btn-try { min-height: 44px; padding: 10px 28px; }
+@media (max-width: 760px) {
+  .signup-inner { padding-top: 32px; padding-bottom: 32px; }
+  .signup-form { flex-basis: 100%; }
+  .signup-form input, .signup-form .btn-try { flex-basis: 100%; }
+}
 @media (max-width: 900px) { .story { padding-top: 32px; } .resources { padding-bottom: 96px; } }
 
 /* ---------- Footer (#f8f9fa, 108px margins, 3 columns / 40px gap) ---------- */
@@ -311,20 +309,45 @@ h3 { font-size: 28px; line-height: 36px; }
 @media (min-width: 1100px) {
   .site-footer { padding-left: max(var(--margin), var(--gutter-l)); padding-right: max(var(--margin), var(--gutter-r)); }
 }
-.footer-bottom {
+.footer-grid {
   max-width: var(--content); margin-inline: auto;
-  display: flex; align-items: flex-start; flex-wrap: wrap; gap: 0 24px;
-  padding: 40px 0 8px;
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 40px 48px; padding: 56px 0 40px;
+  font-size: 15px; line-height: 22px;
 }
-.footer-bottom .brand { height: 24px; margin-right: 24px; margin-bottom: 32px; }
-.legal { display: flex; flex-wrap: wrap; gap: 0 24px; color: var(--ink-2); }
-.legal li { padding-bottom: 16px; }
-.legal a { display: inline-flex; align-items: center; gap: 8px; }
-.legal a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-.legal svg { width: 24px; height: 24px; fill: currentColor; }
-.legal-right { margin-left: auto; }
-@media (max-width: 760px) {
-  .legal-right { margin-left: 0; }
+.brand-footer img { height: 22px; }
+.brand-footer .brand-suffix { font-size: 15px; margin-bottom: -2px; }
+.footer-brand p { margin-top: 16px; color: var(--ink-2); }
+.footer-brand p + p { margin-top: 4px; }
+.footer-brand a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.footer-strong { margin-top: 16px; display: grid; gap: 8px; font-weight: 600; color: var(--heading); }
+.footer-social { margin-top: 24px; display: flex; gap: 12px; }
+.footer-social a { display: inline-flex; width: 32px; height: 32px; border-radius: 50%; background: var(--heading); color: #fff; align-items: center; justify-content: center; transition: background-color .2s; }
+.footer-social a:hover { background: var(--accent); }
+.footer-social svg { width: 16px; height: 16px; fill: currentColor; }
+.footer-links { display: grid; gap: 14px; align-content: start; color: var(--heading); }
+.footer-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.footer-actions { display: grid; gap: 12px; align-content: start; min-width: 144px; }
+.btn-footer { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 8px 20px; border-radius: 12px; font-size: 15px; font-weight: 500; border: 1.5px solid #0b2a16; transition: background-color .2s, color .2s; }
+.btn-footer-solid { background: #0b2a16; color: #cffadf; }
+.btn-footer-solid:hover { background: #06180c; border-color: #06180c; }
+.footer-legal {
+  max-width: var(--content); margin-inline: auto;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 32px;
+  padding: 16px 0 32px; border-top: 1px solid var(--rule);
+  font-size: 13px; line-height: 20px; color: var(--ink-2);
+}
+.footer-legal ul { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.footer-legal a:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 1000px) {
+  .footer-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-actions { grid-column: 1 / -1; grid-auto-flow: column; justify-content: start; }
+}
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; padding-top: 40px; }
+  .footer-actions { grid-auto-flow: row; }
+  .btn-footer { width: 100%; }
 }
 
 /* ---------- Article sheets ----------
@@ -474,8 +497,6 @@ html.sheet-open body { padding-right: var(--sbw, 0px); }
 }
 
 /* Clickable items read as clickable */
-.footer-bottom button.link { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
-.footer-bottom button.link:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .btn-try { border: 0; cursor: pointer; font-family: inherit; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .nowrap { white-space: nowrap; }
