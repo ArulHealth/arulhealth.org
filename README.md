@@ -1,6 +1,6 @@
 # arulhealth.org
 
-The social-impact home for Arul Health. A single static page that follows the google.org homepage grid section for section: headline, program rail, mission statement, feature image, three focus areas, resources call-out, footer.
+The social-impact home for Arul Health. A single static page laid out after bostonjcc.org/who-we-are: a split hero (copy left, photo fading into a tint on the right), the three focus areas as alternating photo / copy rows with an offset color block behind each photo, a four-up "What we believe" row, the impact figures on a tinted band, the eight programs as a card grid, a "Why we exist" story row, a resources row, and the footer. Headings are Lora; body text is Google Sans Text. The header, footer and article sheets are unchanged from the earlier google.org-style design.
 
 **Tagline:** Unlocking healthcare for everyone, everywhere.
 
@@ -12,7 +12,7 @@ Plain HTML, CSS, and a few lines of JavaScript. No build step, no dependencies. 
 index.html       the page
 scholars.html    Arul Scholars (chapters & campus initiatives), served at /scholars via cleanUrls; linked from the header menu
 styles.css       tokens + layout (measurements from a 1512px google.org capture)
-script.js        program rail (transform-driven endless slider: wheel, drag, arrows), mobile menu, article sheets
+script.js        mobile menu, article sheets
 assets/          logo, favicon
 assets/photos/   card and section photos
 assets/photos/scholars/  event photos for the Scholars page
@@ -25,7 +25,7 @@ Only two things on the home page send visitors to arulhealth.com, both in a new 
 
 | Trigger | Article id |
 |---|---|
-| The eight program cards | `clinical-trials`, `rides-and-lodging`, `financial-aid`, `denials-and-appeals`, `pediatric-cancer`, `metastatic-breast-cancer`, `peer-navigators`, `medical-records` |
+| The eight "Our work" cards | `clinical-trials`, `rides-and-lodging`, `financial-aid`, `denials-and-appeals`, `pediatric-cancer`, `metastatic-breast-cancer`, `peer-navigators`, `medical-records` |
 | The three focus cards | `access-to-care`, `healthy-habits`, `stronger-communities` |
 | "Up next" chain only | `get-started` (contact by email to support@arulhealth.com) |
 | Footer: About Arul Health, Help | `about`, `help` |
