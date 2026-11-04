@@ -268,12 +268,14 @@ h3 { font-size: 28px; line-height: 36px; }
 @media (max-width: 900px) { .values { padding-top: 96px; } }
 /* Partner logos: grayscale, equal height, centered in four columns */
 .logo-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px; align-items: center; margin-top: 56px; }
-.logo-row li { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.logo-more { font-size: 14px; line-height: 20px; color: var(--ink-3); font-style: italic; }
+.logo-row li { display: flex; justify-content: center; }
 .logo-row img { width: 100%; max-width: 220px; height: 64px; object-fit: contain; filter: grayscale(1); opacity: .7; transition: opacity .2s, filter .2s; }
 .logo-row li:hover img { filter: none; opacity: 1; }
 .logo-row .is-larger img { max-width: 280px; height: 84px; }
-@media (max-width: 1000px) { .logo-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 64px; } }
+/* "and more..." sits below the row, centered under the last column */
+.logo-more { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px; margin-top: 40px; font-size: 14px; line-height: 20px; color: var(--ink-3); font-style: italic; }
+.logo-more span { grid-column: 4; text-align: center; }
+@media (max-width: 1000px) { .logo-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 64px; } .logo-more { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 32px; } .logo-more span { grid-column: 2; } }
 @media (max-width: 560px) { .logo-row { gap: 28px; margin-top: 40px; } .logo-row img { height: 48px; } .logo-row .is-larger img { height: 60px; } }
 
 /* ---------- Our impact: figures on a tinted band ---------- */
