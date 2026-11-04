@@ -272,6 +272,13 @@ h3 { font-size: 28px; line-height: 36px; }
 @media (max-width: 1000px) { .values-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 900px) { .values { padding-top: 96px; } }
 @media (max-width: 560px) { .values-grid { grid-template-columns: 1fr; gap: 32px; margin-top: 40px; } }
+/* Partner logos: grayscale, equal height, centered in four columns */
+.logo-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px; align-items: center; margin-top: 80px; }
+.logo-row li { display: flex; justify-content: center; }
+.logo-row img { width: 100%; max-width: 220px; height: 64px; object-fit: contain; filter: grayscale(1); opacity: .7; transition: opacity .2s, filter .2s; }
+.logo-row li:hover img { filter: none; opacity: 1; }
+@media (max-width: 1000px) { .logo-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 64px; } }
+@media (max-width: 560px) { .logo-row { gap: 28px; margin-top: 48px; } .logo-row img { height: 48px; } }
 
 /* ---------- Our impact: figures on a tinted band ---------- */
 .impact { margin-top: 160px; padding: 112px 0; background: var(--bg-tint); }
