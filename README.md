@@ -25,7 +25,7 @@ Only two things on the home page send visitors to arulhealth.com, both in a new 
 
 | Trigger | Article id |
 |---|---|
-| The eight "Our work" cards | `clinical-trials`, `rides-and-lodging`, `financial-aid`, `denials-and-appeals`, `pediatric-cancer`, `metastatic-breast-cancer`, `peer-navigators`, `medical-records` |
+| "Up next" chain only (the "Our work" grid was removed) | `clinical-trials`, `rides-and-lodging`, `financial-aid`, `denials-and-appeals`, `pediatric-cancer`, `metastatic-breast-cancer`, `peer-navigators`, `medical-records` |
 | The three focus cards | `access-to-care`, `healthy-habits`, `stronger-communities` |
 | "Up next" chain only | `get-started` (contact by email to support@arulhealth.com) |
 | Footer: About Arul Health, Help | `about`, `help` |
@@ -53,7 +53,6 @@ Measured from google.org at 1512px wide and reproduced here:
 | Statement | 36px / 44px, -0.25px tracking, ~700px measure |
 | Feature image | 1296 × 729 (`home-visit.jpg`, a navigator with a patient at home) |
 | Our focus | h2 48px / 56px; lede 28px / 36px; 3 columns, 64px gap, 3:4 images with 8px top radius; 28px titles, 16px `#5f6368` copy, "Learn more" link + chevron |
-| Our impact | h2 48px / 56px; lede 28px / 36px; four figures at 48px / 56px with 16px `#5f6368` labels (not on google.org's homepage; added so the "Our impact" nav link has an in-page target) |
 | Resources | 502px image (the arulhealth.com home page, 1812:1066) + 502px copy, 64px gap; h2 48px / 56px; 18px / 28px copy |
 | Footer | `#f8f9fa`; single row: logo + About Arul Health, Help, copyright (the link columns, Privacy and Terms were removed on request) |
 
