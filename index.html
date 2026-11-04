@@ -152,6 +152,24 @@
       </div>
     </section>
 
+    <!-- Join our email list: a tinted band above the footer. The form opens a
+         prefilled email until a list provider (Mailchimp, etc.) is wired in. -->
+    <section class="signup" aria-labelledby="signup-title">
+      <div class="wrap signup-inner">
+        <div class="signup-copy">
+          <h2 id="signup-title">Join our email list</h2>
+          <p>Stay updated on what's happening at Arul Health.org</p>
+        </div>
+        <form class="signup-form" action="mailto:support@arulhealth.com?subject=Join%20the%20Arul%20Health.org%20email%20list" method="post" enctype="text/plain">
+          <label class="visually-hidden" for="signup-name">Name</label>
+          <input id="signup-name" name="Name" type="text" placeholder="Name" autocomplete="name" required>
+          <label class="visually-hidden" for="signup-email">Email address</label>
+          <input id="signup-email" name="Email" type="email" placeholder="Email Address" autocomplete="email" required>
+          <button class="btn-try" type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">

@@ -279,6 +279,26 @@ h3 { font-size: 28px; line-height: 36px; }
 /* ---------- Our story + resources ---------- */
 .story { padding-top: 48px; }
 .resources { padding-bottom: 160px; }
+
+/* ---------- Join our email list ---------- */
+.signup { background: var(--bg-tint); }
+.signup-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px 48px; flex-wrap: wrap; padding-top: 40px; padding-bottom: 40px; }
+.signup-copy h2 { font-size: 22px; line-height: 30px; }
+.signup-copy p { margin-top: 4px; color: var(--ink-2); max-width: 36ch; }
+.signup-form { display: flex; flex-wrap: wrap; gap: 12px; flex: 1 1 520px; justify-content: flex-end; }
+.signup-form input {
+  flex: 1 1 180px; min-width: 0; min-height: 44px; padding: 10px 14px;
+  font: inherit; font-size: 15px; color: var(--ink);
+  background: var(--bg); border: 1px solid var(--rule); border-radius: 8px;
+}
+.signup-form input::placeholder { color: var(--ink-3); }
+.signup-form input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.signup-form .btn-try { min-height: 44px; padding: 10px 28px; }
+@media (max-width: 760px) {
+  .signup-inner { padding-top: 32px; padding-bottom: 32px; }
+  .signup-form { flex-basis: 100%; }
+  .signup-form input, .signup-form .btn-try { flex-basis: 100%; }
+}
 @media (max-width: 900px) { .story { padding-top: 32px; } .resources { padding-bottom: 96px; } }
 
 /* ---------- Footer (#f8f9fa, 108px margins, 3 columns / 40px gap) ---------- */
