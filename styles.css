@@ -294,7 +294,12 @@ h3 { font-size: 28px; line-height: 36px; }
 .signup-form input::placeholder { color: var(--ink-3); }
 .signup-form input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
 .signup-form .btn-try { min-height: 44px; padding: 10px 28px; }
+.signup-form .btn-try:disabled { opacity: 0.6; cursor: progress; }
+.signup-status { flex-basis: 100%; text-align: right; font-size: 15px; color: var(--ink-2); }
+.signup-status:empty { display: none; }
+.signup-status.is-error { color: #b3261e; }
 @media (max-width: 760px) {
+  .signup-status { text-align: left; }
   .signup-inner { padding-top: 32px; padding-bottom: 32px; }
   .signup-form { flex-basis: 100%; }
   .signup-form input, .signup-form .btn-try { flex-basis: 100%; }

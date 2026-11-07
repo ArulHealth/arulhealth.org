@@ -40,6 +40,19 @@ How it works:
 
 The articles were written on 2026-10-22 from the Arul Health knowledge vault. They name no partners or investors on purpose; add one only with that organization's sign-off.
 
+## Email list
+
+The "Join our email list" band posts `{name, email, website, source}` as JSON to the Arul orchestrator's public
+`POST /newsletter/subscribe` (the form's `data-endpoint`, `https://api.arulhealth.com`) and shows the result in place.
+`website` is a field people never see; a bot that fills it is answered as if it worked and nothing is stored. The
+endpoint is rate-limited per IP and stores the address in `newsletter_subscriber` in the Arul database. Staff copy
+the whole list (these sign-ups plus patient, caregiver and staff addresses, minus unsubscribes) from the admin
+console's **Growth** tab, and record unsubscribes there too.
+
+The orchestrator only accepts the browser call from origins in its `CORS_ALLOW_ORIGINS`
+(`infra/gcp/cloud-run/orchestrator.service.yaml` in the arul-health repo lists `https://arulhealth.org` and `www`).
+For a local test, point `data-endpoint` at a local orchestrator that allows `http://localhost:<port>`.
+
 ## Layout reference
 
 Measured from google.org at 1512px wide and reproduced here:

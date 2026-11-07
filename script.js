@@ -238,3 +238,41 @@
     open(initial);
   }
 })();
+
+// Email list. Posts to the Arul newsletter endpoint (form's data-endpoint) and
+// reports the result in place; the hidden "website" field catches form bots.
+(function () {
+  const form = document.querySelector('.signup-form[data-endpoint]');
+  if (!form) return;
+  const status = form.querySelector('.signup-status');
+  const button = form.querySelector('button[type="submit"]');
+  const say = (text, isError) => {
+    status.textContent = text;
+    status.classList.toggle('is-error', !!isError);
+  };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = form.elements.name.value.trim();
+    const email = form.elements.email.value.trim();
+    if (!name) return say('Please add your name.', true);
+    if (!form.elements.email.checkValidity() || !email) return say('Please enter a valid email address.', true);
+    button.disabled = true;
+    say('Adding you to the list…');
+    try {
+      const res = await fetch(form.dataset.endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, website: form.elements.website.value, source: 'arulhealth.org' }),
+      });
+      if (res.status === 422) return say('Please enter a valid email address.', true);
+      if (res.status === 429) return say('Too many tries. Please wait a little and try again.', true);
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      say("Thanks! You're on the list.");
+    } catch (err) {
+      say('Something went wrong. Please try again, or email support@arulhealth.com.', true);
+    } finally {
+      button.disabled = false;
+    }
+  });
+})();

@@ -152,20 +152,25 @@
       </div>
     </section>
 
-    <!-- Join our email list: a tinted band above the footer. The form opens a
-         prefilled email until a list provider (Mailchimp, etc.) is wired in. -->
+    <!-- Join our email list: a tinted band above the footer. The form posts to the
+         Arul orchestrator's newsletter endpoint (see README, "Email list"). -->
     <section class="signup" aria-labelledby="signup-title">
       <div class="wrap signup-inner">
         <div class="signup-copy">
           <h2 id="signup-title">Join our email list</h2>
           <p>Stay updated on what's happening at Arul Health</p>
         </div>
-        <form class="signup-form" action="mailto:support@arulhealth.com?subject=Join%20the%20Arul%20Health.org%20email%20list" method="post" enctype="text/plain">
+        <form class="signup-form" data-endpoint="https://api.arulhealth.com/newsletter/subscribe" novalidate>
           <label class="visually-hidden" for="signup-name">Name</label>
-          <input id="signup-name" name="Name" type="text" placeholder="Name" autocomplete="name" required>
+          <input id="signup-name" name="name" type="text" placeholder="Name" autocomplete="name" maxlength="120" required>
           <label class="visually-hidden" for="signup-email">Email address</label>
-          <input id="signup-email" name="Email" type="email" placeholder="Email Address" autocomplete="email" required>
+          <input id="signup-email" name="email" type="email" placeholder="Email Address" autocomplete="email" maxlength="254" required>
+          <div class="visually-hidden" aria-hidden="true">
+            <label for="signup-website">Leave this empty</label>
+            <input id="signup-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
           <button class="btn-try" type="submit">Submit</button>
+          <p class="signup-status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </section>
