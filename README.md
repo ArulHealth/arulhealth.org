@@ -16,6 +16,7 @@ script.js        mobile menu, article sheets
 assets/          logo, favicon
 assets/photos/   card and section photos
 assets/photos/scholars/  event photos for the Scholars page
+research/        the Research tab: index.html (mosaic of papers), one .html per paper, research.css, research.js; see "Research" below
 firebase.json    Firebase Hosting config (site `arulhealth-org`; README, dotfiles and .github are not uploaded)
 ```
 
@@ -39,6 +40,17 @@ How it works:
 - To add an article: add a template, then put `data-sheet="<id>"` on the trigger. No script change needed.
 
 The articles were written on 2026-10-22 from the Arul Health knowledge vault. They name no partners or investors on purpose; add one only with that organization's sign-off.
+
+## Research
+
+`/research` is the research index: a mosaic of tiles (`.tile` in `research/index.html`). A tile is a paper, a single finding that deep-links into a paper section, or a "Coming next" placeholder; `data-kind` (`paper`, `finding`, `next`) drives the filter chips. Tile art is drawn by `research.js` from `data-art` (`people`, `rings`, `columns`, `ticks`).
+
+Each paper is one HTML file in `research/`, served at `/research/<slug>`. The template has a dark hero, a sticky section bar with scrollspy and a reading-progress line, numbered figures, one sticky "scrolly" figure whose dot grid changes as the steps scroll past, and a method-and-limits section with a citation block.
+
+- Every chart value is written in the HTML (`--v` on a bar or segment, `data-on` / `data-hot` on a scrolly step). `research.js` only animates; with JS off the page still shows every number.
+- Chart colors are the `--c-*` tokens at the top of `research.css`. They were checked for color-blind separation; check any new ones the same way before adding them.
+- To add a paper: copy `hidden-work-of-being-sick.html`, change the sections and figures, add a tile to `research/index.html`, and update the counts in the index hero.
+- Paper 001 is written from the January 2026 survey of 400 adults (the same one cited in the Access to Care article). It does not name the research partner, and its limits section says the survey was not independent.
 
 ## Email list
 
