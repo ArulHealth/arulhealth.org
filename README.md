@@ -49,7 +49,7 @@ Each paper is one HTML file in `research/`, served at `/research/<slug>`. The te
 
 - Every chart value is written in the HTML (`--v` on a bar or segment, `data-on` / `data-hot` on a scrolly step). `research.js` only animates; with JS off the page still shows every number.
 - Chart colors are the `--c-*` tokens at the top of `research.css`. They were checked for color-blind separation; check any new ones the same way before adding them.
-- To add a paper: copy `hidden-work-of-being-sick.html`, change the sections and figures, and add a tile to `research/index.html`. The index hero lists the four topic areas (technology, insurance, patient groups, access to care).
+- To add a paper: copy `hidden-work-of-being-sick.html`, change the sections and figures, and add a tile to `research/index.html`.
 - Paper 001 is written from the January 2026 survey of 400 adults (the same one cited in the Access to Care article). It does not name the research partner, and its limits section says the survey was not independent.
 
 ## Email list
