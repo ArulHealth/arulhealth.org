@@ -69,15 +69,18 @@
     const dots = wrap.querySelector('[data-dots]');
     const big = wrap.querySelector('.scrolly-read b');
     const txt = wrap.querySelector('.scrolly-read span');
+    const timed = $$('[data-at]', wrap);   // transcript lines etc. shown from step N on
     const steps = $$('.step', wrap);
     let active = null;
     function activate(step) {
       if (step === active) return;
       active = step;
+      const n = steps.indexOf(step);
       steps.forEach((s) => s.classList.toggle('is-active', s === step));
-      setDots(dots, +step.dataset.on, +step.dataset.hot);
-      big.textContent = step.dataset.read;
-      txt.textContent = step.dataset.text;
+      if (dots) setDots(dots, +step.dataset.on, +step.dataset.hot);
+      if (big && step.dataset.read) big.textContent = step.dataset.read;
+      if (txt && step.dataset.text) txt.textContent = step.dataset.text;
+      timed.forEach((el) => el.classList.toggle('is-on', +el.dataset.at <= n));
     }
     const io = new IntersectionObserver((entries) => {
       entries.forEach((en) => { if (en.isIntersecting) activate(en.target); });
@@ -183,6 +186,18 @@
         add(s, 'circle', { cx: 300, cy: 0, r, fill: 'none', stroke: 'currentColor', 'stroke-opacity': .14, 'stroke-width': 18 });
         add(s, 'circle', { cx: 300, cy: 0, r, fill: 'none', stroke: 'currentColor', 'stroke-opacity': .9 - i * .22, 'stroke-width': 18, 'stroke-dasharray': `${c * v * .5} ${c}`, transform: 'rotate(90 300 0)' });
       });
+      return s;
+    },
+    // a voice waveform
+    wave() {
+      const s = svg(500, 360), n = 56;
+      let x = 3;
+      const rnd = () => (x = (x * 1664525 + 1013904223) % 4294967296) / 4294967296;
+      for (let i = 0; i < n; i++) {
+        const env = Math.sin((i / (n - 1)) * Math.PI) * .75 + .25;
+        const h = (20 + rnd() * 150) * env;
+        add(s, 'rect', { x: 22 + i * 8.2, y: 120 - h / 2, width: 4.4, height: h, rx: 2.2, fill: i % 5 === 0 ? '#cffadf' : '#b592ff', 'fill-opacity': .9 });
+      }
       return s;
     },
     // rising columns

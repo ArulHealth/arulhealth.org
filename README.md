@@ -43,14 +43,14 @@ The articles were written on 2026-10-22 from the Arul Health knowledge vault. Th
 
 ## Research
 
-`/research` is the research index: a mosaic of tiles (`.tile` in `research/index.html`). A tile is a paper, a single finding that deep-links into a paper section, or a "Coming next" placeholder; `data-kind` (`paper`, `finding`, `next`) drives the filter chips. Tile art is drawn by `research.js` from `data-art` (`people`, `rings`, `columns`, `ticks`).
+`/research` is the research index: a mosaic of tiles (`.tile` in `research/index.html`). A tile is a paper or a single finding that deep-links into a paper section; `data-kind` (`paper`, `finding`) drives the filter chips. Tile art is drawn by `research.js` from `data-art` (`wave`, `people`, `rings`, `columns`, `ticks`).
 
 Each paper is one HTML file in `research/`, served at `/research/<slug>`. The template has a dark hero, a sticky section bar with scrollspy and a reading-progress line, numbered figures, one sticky "scrolly" figure whose dot grid changes as the steps scroll past, and a method-and-limits section with a citation block.
 
 - Every chart value is written in the HTML (`--v` on a bar or segment, `data-on` / `data-hot` on a scrolly step). `research.js` only animates; with JS off the page still shows every number.
 - Chart colors are the `--c-*` tokens at the top of `research.css`. They were checked for color-blind separation; check any new ones the same way before adding them.
-- To add a paper: copy `hidden-work-of-being-sick.html`, change the sections and figures, and add a tile to `research/index.html`.
-- Paper 001 is written from the January 2026 survey of 400 adults (the same one cited in the Access to Care article). It does not name the research partner, and its limits section says the survey was not independent.
+- To add a paper: copy `who-is-calling.html`, change the sections and figures, and add a tile to `research/index.html`.
+- Paper 001 (`who-is-calling.html`, voice agents at healthcare's front door) is a **draft**: it carries a yellow draft bar, yellow "confirm" tags (`.tbc`) and `noindex`. Remove all three, and get the health system's agreement for the field notes, before it is published. A paper can also use a call-transcript scrolly (`.lines` with `data-at` on each line) in place of the dot grid.
 
 ## Email list
 

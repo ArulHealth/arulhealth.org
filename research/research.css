@@ -376,6 +376,94 @@ a.tile:hover .tile-go::after { transform: translateX(4px); }
 .paper-end a { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px 22px; border-radius: 12px; background: var(--mint); color: #0b2a16; font-weight: 500; }
 .paper-end a:hover { background: #fff; }
 
+/* ---------- Draft markers (remove before publishing) ---------- */
+.draft-bar { background: #ffe9a8; color: #3d2c00; font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: .04em; text-align: center; padding: 8px 16px; }
+.tbc { background: #fff3c4; color: #3d2c00; border-radius: 4px; padding: 1px 6px; font-family: var(--font-mono); font-size: .72em; letter-spacing: .02em; white-space: nowrap; vertical-align: 1px; }
+sup.ref { font-family: var(--font-mono); font-size: .62em; margin-left: 1px; }
+sup.ref a { color: var(--accent-hover); text-decoration: none; padding: 0 1px; }
+sup.ref a:hover { text-decoration: underline; }
+
+/* ---------- Call card (hero + scrolly figure) ---------- */
+.call { margin: 0; padding: 28px; border-radius: 24px; background: var(--night-2); border: 1px solid var(--night-rule); color: var(--night-ink); }
+.call-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--night-ink-2); }
+.call-top b { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; color: var(--mint); }
+.call-top b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--mint); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+.wave { display: flex; align-items: center; gap: 4px; height: 88px; margin-top: 24px; }
+.wave i { flex: 1; min-width: 2px; height: calc(var(--h) * 1%); border-radius: 2px; background: #b592ff; animation: wave 1.4s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -70ms); }
+.wave i:nth-child(5n) { background: var(--mint); }
+@keyframes wave { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
+.checks { margin: 24px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--night-rule); }
+.checks li { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--night-rule); font-size: 15px; line-height: 22px; }
+.checks span { color: var(--night-ink); }
+.checks b { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .04em; white-space: nowrap; padding: 3px 10px; border-radius: 999px; }
+.checks .ok { background: rgba(207, 250, 223, 0.16); color: var(--mint); }
+.checks .no { background: rgba(255, 233, 168, 0.14); color: #ffe9a8; }
+.call figcaption { margin-top: 16px; font-family: var(--font-mono); font-size: 12px; line-height: 18px; color: var(--night-ink-2); }
+
+/* Scrolly transcript: lines appear as steps scroll past (research.js adds .is-on) */
+.lines { margin-top: 20px; display: grid; gap: 10px; min-height: 250px; align-content: start; }
+.line { max-width: 88%; padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 21px; background: rgba(255, 255, 255, 0.08); color: var(--night-ink); }
+.line small { display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--night-ink-2); margin-bottom: 2px; }
+.line.is-agent { justify-self: end; background: rgba(142, 77, 255, 0.34); }
+.line.is-sys { max-width: none; justify-self: stretch; background: transparent; border: 1px dashed var(--night-rule); font-family: var(--font-mono); font-size: 12px; color: var(--night-ink-2); }
+.line.is-end { max-width: none; justify-self: stretch; background: rgba(255, 233, 168, 0.14); color: #ffe9a8; font-family: var(--font-mono); font-size: 12px; }
+.js .line { opacity: 0; transform: translateY(8px); transition: opacity .45s var(--ease), transform .45s var(--ease); }
+.js .line.is-on { opacity: 1; transform: none; }
+@media (max-width: 900px) { .scrolly-fig.call .wave { height: 40px; margin-top: 12px; } .lines { min-height: 0; gap: 6px; margin-top: 12px; } .line { font-size: 12px; line-height: 17px; padding: 7px 10px; } .js .line:not(.is-on) { display: none; } }
+
+/* ---------- Timeline ---------- */
+.timeline { margin: 0; padding: 0; list-style: none; display: grid; }
+.timeline li { display: grid; grid-template-columns: 120px 20px minmax(0, 1fr); gap: 16px; padding-bottom: 24px; position: relative; }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline time { font-family: var(--font-mono); font-size: 12px; line-height: 22px; letter-spacing: .04em; color: var(--ink-2); text-align: right; }
+.timeline .pin { position: relative; }
+.timeline .pin::before { content: ""; position: absolute; left: 4px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--k, var(--c-all)); box-shadow: 0 0 0 2px var(--paper); z-index: 1; }
+.timeline li:not(:last-child) .pin::after { content: ""; position: absolute; left: 9px; top: 12px; bottom: -24px; width: 2px; background: var(--rule); }
+.timeline b { display: block; font-weight: 500; font-size: 15px; line-height: 22px; color: var(--heading); }
+.timeline span { display: block; font-size: 14px; line-height: 21px; color: var(--ink-2); margin-top: 2px; }
+@media (max-width: 640px) { .timeline li { grid-template-columns: 20px minmax(0, 1fr); } .timeline time { grid-column: 2; text-align: left; order: -1; } .timeline .pin { grid-row: 1 / span 2; } }
+
+/* ---------- Matrix (checks x what they prove) ---------- */
+.matrix-wrap { overflow-x: auto; }
+.matrix { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 14px; line-height: 20px; }
+.matrix th, .matrix td { padding: 12px 12px; border-bottom: 1px solid var(--rule); text-align: center; }
+.matrix thead th { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); vertical-align: bottom; }
+.matrix th:first-child, .matrix td:first-child { text-align: left; color: var(--heading); font-weight: 400; }
+.matrix tbody th { font-weight: 500; }
+.matrix tbody th small { display: block; font-weight: 400; font-size: 12px; color: var(--ink-3); }
+.matrix .y, .matrix .n, .matrix .p { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; }
+.matrix .y::before, .matrix .n::before, .matrix .p::before { content: ""; width: 12px; height: 12px; border-radius: 50%; box-sizing: border-box; }
+.matrix .y { color: var(--heading); } .matrix .y::before { background: var(--c-many); }
+.matrix .p { color: var(--ink-2); } .matrix .p::before { background: linear-gradient(90deg, var(--c-many) 50%, transparent 50%); border: 2px solid var(--c-many); }
+.matrix .n { color: var(--ink-3); } .matrix .n::before { border: 2px solid #c9c3da; }
+.matrix tr.is-key td, .matrix tr.is-key th { background: #f1ebff; }
+
+/* ---------- Framework ---------- */
+.dial { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 48px; padding: 0; list-style: none; }
+.dial li { padding: 28px 24px; border-radius: 20px; background: var(--night); color: var(--night-ink); position: relative; overflow: hidden; }
+.dial li:nth-child(2) { background: #2a1a63; } .dial li:nth-child(3) { background: #45239c; } .dial li:nth-child(4) { background: #6b2bd9; }
+.dial .letter { font-family: var(--font-serif); font-weight: 700; font-size: 72px; line-height: 1; color: #fff; }
+.dial b { display: block; margin-top: 20px; font-family: var(--font-mono); font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--mint); }
+.dial p { margin-top: 10px; font-size: 15px; line-height: 23px; color: var(--night-ink); }
+.dial .asks { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--night-rule); font-family: var(--font-mono); font-size: 12px; line-height: 18px; color: var(--night-ink-2); }
+@media (max-width: 1000px) { .dial { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .dial { grid-template-columns: 1fr; } }
+.tiers { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14px; line-height: 21px; }
+.tiers th, .tiers td { padding: 14px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.tiers thead th { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.tiers tbody th { white-space: nowrap; font-weight: 500; color: var(--heading); }
+.tiers tbody th i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: var(--k); margin-right: 8px; }
+.tiers td:last-child { font-family: var(--font-mono); font-size: 12px; color: var(--heading); }
+
+/* ---------- Sources ---------- */
+.refs { margin: 32px 0 0; padding: 0; list-style: none; counter-reset: r; display: grid; gap: 12px; }
+.refs li { counter-increment: r; display: grid; grid-template-columns: 32px minmax(0, 1fr); font-size: 14px; line-height: 21px; color: var(--ink); scroll-margin-top: 80px; }
+.refs li::before { content: counter(r); font-family: var(--font-mono); font-size: 12px; color: var(--accent-hover); }
+.refs li:target { background: #f1ebff; border-radius: 6px; }
+.refs a { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+.refs em { font-style: normal; color: var(--ink-3); }
+
 /* Tooltip for chart marks */
 .tip { position: fixed; z-index: 60; pointer-events: none; max-width: 260px; padding: 8px 12px; border-radius: 8px; background: var(--heading); color: #fff; font-size: 13px; line-height: 18px; box-shadow: 0 8px 24px -8px rgba(18, 10, 42, 0.5); opacity: 0; transform: translateY(4px); transition: opacity .15s, transform .15s; }
 .tip.is-on { opacity: 1; transform: none; }
