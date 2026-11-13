@@ -80,11 +80,17 @@
       if (dots) setDots(dots, +step.dataset.on, +step.dataset.hot);
       if (big && step.dataset.read) big.textContent = step.dataset.read;
       if (txt && step.dataset.text) txt.textContent = step.dataset.text;
-      timed.forEach((el) => el.classList.toggle('is-on', +el.dataset.at <= n));
+      timed.forEach((el) => {
+        el.classList.toggle('is-on', +el.dataset.at <= n);
+        el.classList.toggle('is-now', +el.dataset.at === n);   // phones show only the current step's lines
+      });
     }
     const io = new IntersectionObserver((entries) => {
       entries.forEach((en) => { if (en.isIntersecting) activate(en.target); });
-    }, { rootMargin: '-45% 0px -45% 0px' });
+    // Desktop: a step is active while it crosses the middle of the screen.
+    // Phones: the figure is pinned across the top third, so the trigger line
+    // sits lower, in the part of the screen where the text is actually read.
+    }, { rootMargin: window.matchMedia('(max-width: 900px)').matches ? '-68% 0px -30% 0px' : '-45% 0px -45% 0px' });
     steps.forEach((s) => io.observe(s));
     activate(steps[0]);
   });
