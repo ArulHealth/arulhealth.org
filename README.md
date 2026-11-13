@@ -43,7 +43,7 @@ The articles were written on 2026-10-22 from the Arul Health knowledge vault. Th
 
 ## Research
 
-`/research` is the research index: a mosaic of tiles (`.tile` in `research/index.html`). A tile is a paper or a single finding that deep-links into a paper section; `data-kind` (`paper`, `finding`) drives the filter chips. Tile art is drawn by `research.js` from `data-art` (`wave`, `people`, `rings`, `columns`, `ticks`).
+`/research` is the research index: a mosaic of paper tiles (`.tile` in `research/index.html`), one per paper and nothing else. A paper on its own takes the full row; the first of several is the large `.tile-feature`. Tile art is drawn by `research.js` from `data-art` (`wave`, `people`, `rings`, `columns`, `ticks`).
 
 Each paper is one HTML file in `research/`, served at `/research/<slug>`. The template has a dark hero, a sticky section bar with scrollspy and a reading-progress line, numbered figures, one sticky "scrolly" figure whose dot grid changes as the steps scroll past, and a method-and-limits section with a citation block.
 

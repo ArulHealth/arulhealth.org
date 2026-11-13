@@ -196,7 +196,10 @@
       for (let i = 0; i < n; i++) {
         const env = Math.sin((i / (n - 1)) * Math.PI) * .75 + .25;
         const h = (20 + rnd() * 150) * env;
-        add(s, 'rect', { x: 22 + i * 8.2, y: 120 - h / 2, width: 4.4, height: h, rx: 2.2, fill: i % 5 === 0 ? '#cffadf' : '#b592ff', 'fill-opacity': .9 });
+        const r = add(s, 'rect', { class: 'wv', x: 22 + i * 8.2, y: 120 - h / 2, width: 4.4, height: h, rx: 2.2, fill: i % 5 === 0 ? '#cffadf' : '#b592ff', 'fill-opacity': .9 });
+        // Each bar breathes at its own pace so the cover reads as live speech.
+        r.style.animationDuration = (0.7 + rnd() * 0.9).toFixed(2) + 's';
+        r.style.animationDelay = (-rnd() * 1.6).toFixed(2) + 's';
       }
       return s;
     },
