@@ -54,9 +54,12 @@
 .reach-logos li { display: flex; align-items: center; justify-content: center; }
 .reach-logos img { height: 72px; width: auto; max-width: min(240px, 70vw); object-fit: contain; filter: grayscale(1); opacity: .7; transition: opacity .2s, filter .2s; }
 .reach-logos .is-wide img { height: 46px; }
+.reach-logos .is-tall img { height: 96px; }   /* stacked marks need more height to read at the same weight */
+/* The pastel CNCF mark goes too pale in grayscale, so it is toned down to match */
+.reach-logos img[src*="cncf"] { filter: grayscale(1) brightness(.62); opacity: .8; }
 .reach-logos li:hover img { filter: none; opacity: 1; }
 .reach-more { margin-top: 36px; font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--ink-2); }
-@media (max-width: 640px) { .reach-logos { gap: 28px 40px; } .reach-logos img { height: 56px; } .reach-logos .is-wide img { height: 36px; } }
+@media (max-width: 640px) { .reach-logos { gap: 28px 40px; } .reach-logos img { height: 56px; } .reach-logos .is-wide img { height: 36px; } .reach-logos .is-tall img { height: 76px; } }
 
 /* ---------- Join ---------- */
 .reach-join { position: relative; background: var(--night); color: var(--night-ink); overflow: hidden; isolation: isolate; }
