@@ -28,9 +28,10 @@
   --ease: cubic-bezier(.2, .8, .2, 1);
 }
 
-/* Nothing on a research page may widen the page (body alone does not stop
-   sideways panning on phones). */
-html { overflow-x: clip; }
+/* Nothing inside a paper may widen the page. This is `clip` on the content
+   wrappers, never on <html>: setting overflow on <html> turns <body> into its
+   own scroll box and silently breaks every position: sticky on the page. */
+.paper, .paper-hero, .mosaic-section { overflow-x: clip; }
 .mono { font-family: var(--font-mono); font-feature-settings: "zero" 1; }
 .label {
   font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 500;
