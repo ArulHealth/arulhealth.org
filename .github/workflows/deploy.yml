@@ -40,7 +40,7 @@ jobs:
       - name: Stamp asset version
         # styles.css / script.js are referenced as ?v=__ASSET_VERSION__ so a
         # deploy never serves new HTML with a browser-cached old stylesheet.
-        run: sed -i "s/__ASSET_VERSION__/${GITHUB_SHA::8}/g" index.html research/*.html
+        run: sed -i "s/__ASSET_VERSION__/${GITHUB_SHA::8}/g" index.html reach.html research/*.html
       - run: npx -y ${{ env.FIREBASE_TOOLS }} deploy --only hosting:${{ env.SITE_ID }} --project ${{ env.PROJECT_ID }} --non-interactive
 
   preview:
@@ -65,7 +65,7 @@ jobs:
       - name: Stamp asset version
         # styles.css / script.js are referenced as ?v=__ASSET_VERSION__ so a
         # deploy never serves new HTML with a browser-cached old stylesheet.
-        run: sed -i "s/__ASSET_VERSION__/${GITHUB_SHA::8}/g" index.html research/*.html
+        run: sed -i "s/__ASSET_VERSION__/${GITHUB_SHA::8}/g" index.html reach.html research/*.html
       - id: deploy
         # --no-authorized-domains: the site has no Firebase Auth, and the deployer can't edit it.
         run: |

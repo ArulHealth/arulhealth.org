@@ -1,0 +1,66 @@
+/* arulhealth.org/reach — Arul Reach, the partner program page. A web version
+   of the partner overview PDF. Loaded after /styles.css and
+   /research/research.css, whose tokens, section bar, figures and reveal it
+   reuses; this file only adds what is specific to this page. */
+
+.reach-hero h1 { max-width: 18ch; font-size: clamp(40px, 5.6vw, 76px); }
+.reach-hero .rx-dek strong { color: #fff; font-weight: 500; }
+.reach-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+.btn-mint, .btn-ghost { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 14px 26px; border-radius: 12px; font-size: 16px; font-weight: 500; transition: background-color .2s, border-color .2s; }
+.btn-mint { background: var(--mint); color: #0b2a16; }
+.btn-mint:hover { background: #fff; }
+.btn-ghost { border: 1px solid var(--night-rule); color: #fff; }
+.btn-ghost:hover { border-color: #fff; }
+
+.reach-nav-cta { flex-shrink: 0; display: inline-flex; align-items: center; min-height: 36px; padding: 6px 16px; border-radius: 10px; background: #0b2a16; color: var(--mint); font-size: 14px; font-weight: 500; }
+.reach-nav-cta:hover { background: #06180c; }
+
+.reach .sec-head h2 { max-width: 22ch; }
+
+/* What Arul grants: four cards */
+.grants { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 48px; }
+.grants li { padding: 28px 24px; border-radius: 20px; background: var(--bg-tint); }
+.grants li:nth-child(1) { background: var(--night); }
+.grants li:nth-child(1) b { color: #fff; }
+.grants li:nth-child(1) p { color: var(--night-ink-2); }
+.grants li:nth-child(1) .mono { color: var(--mint); }
+.grants .mono { font-size: 12px; color: var(--accent-hover); }
+.grants b { display: block; margin-top: 36px; font-family: var(--font-serif); font-size: 22px; line-height: 28px; color: var(--heading); }
+.grants p { margin-top: 10px; font-size: 15px; line-height: 23px; color: var(--ink-2); }
+@media (max-width: 1000px) { .grants { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .grants { grid-template-columns: 1fr; } }
+
+/* What members get: term | description rows */
+.gets { margin: 40px 0 0; border-top: 1px solid var(--rule); }
+.gets > div { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 12px 48px; padding: 28px 0; border-bottom: 1px solid var(--rule); }
+.gets dt { font-family: var(--font-serif); font-weight: 700; font-size: 22px; line-height: 30px; color: var(--heading); }
+.gets dd { margin: 0; font-size: 17px; line-height: 28px; color: #2b2540; max-width: 62ch; }
+.gets .is-key { background: var(--mint); border-radius: 16px; border-bottom: 0; padding: 28px 24px; margin-top: 16px; }
+.gets .is-key dt, .gets .is-key dd { color: #0b2a16; }
+@media (max-width: 760px) { .gets > div { grid-template-columns: 1fr; padding: 22px 0; } .gets .is-key { padding: 22px 20px; } .gets dd { font-size: 16px; line-height: 26px; } }
+
+.order.fit { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 760px) { .order.fit { grid-template-columns: 1fr; } }
+
+.community { margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--rule); }
+.community .logo-row { margin-top: 32px; }
+
+.reach .tiers th[scope="row"] { white-space: normal; min-width: 200px; }
+.reach .tiers td:last-child { font-family: var(--font-text); font-size: 15px; line-height: 23px; color: #2b2540; }
+.reach .fig-body { margin-top: 12px; }
+
+/* Questions */
+.faq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
+.faq > div { padding: 28px; border: 1px solid var(--rule); border-radius: 20px; background: var(--paper); }
+.faq h3 { margin: 0; font-size: 20px; line-height: 28px; }
+.faq p { margin-top: 12px; font-size: 16px; line-height: 26px; color: #2b2540; }
+@media (max-width: 760px) { .faq { grid-template-columns: 1fr; } }
+
+.order.join .is-contact { background: var(--night); border-color: var(--night); }
+.order.join .is-contact::before { content: "Contact"; color: var(--mint); letter-spacing: .08em; text-transform: uppercase; }
+.order.join .is-contact b { color: #fff; }
+.order.join .is-contact span { color: var(--night-ink-2); }
+.order.join .is-contact a { color: var(--mint); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+
+.reach { padding-bottom: 120px; }
+.reach-end p { margin-top: 8px; color: var(--night-ink-2); font-size: 17px; }
