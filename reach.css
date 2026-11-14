@@ -46,8 +46,17 @@
 @media (max-width: 900px) { .pillars { grid-template-columns: 1fr; } .pillar { min-height: 340px; } }
 
 /* ---------- Community ---------- */
-.reach-community { background: var(--paper); padding: 96px 0; text-align: center; border-block: 1px solid var(--rule); }
-.reach-community .logo-row { margin-top: 40px; }
+/* White, not the off-white paper tone: two of the logo files have white backgrounds */
+.reach-community { background: #fff; padding: 96px 0; text-align: center; border-block: 1px solid var(--rule); }
+/* Logos sit on one centered line and wrap evenly; each is sized by height so
+   a wide wordmark cannot outgrow its column on a phone. */
+.reach-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 36px 64px; margin-top: 40px; }
+.reach-logos li { display: flex; align-items: center; justify-content: center; }
+.reach-logos img { height: 72px; width: auto; max-width: min(240px, 70vw); object-fit: contain; filter: grayscale(1); opacity: .7; transition: opacity .2s, filter .2s; }
+.reach-logos .is-wide img { height: 46px; }
+.reach-logos li:hover img { filter: none; opacity: 1; }
+.reach-more { margin-top: 36px; font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--ink-2); }
+@media (max-width: 640px) { .reach-logos { gap: 28px 40px; } .reach-logos img { height: 56px; } .reach-logos .is-wide img { height: 36px; } }
 
 /* ---------- Join ---------- */
 .reach-join { position: relative; background: var(--night); color: var(--night-ink); overflow: hidden; isolation: isolate; }
@@ -57,8 +66,6 @@
 .reach-join h2 { color: #fff; font-size: clamp(40px, 6vw, 84px); line-height: 1.04; letter-spacing: -0.02em; max-width: 14ch; }
 .reach-join p { max-width: 44ch; font-size: 19px; line-height: 30px; color: var(--night-ink-2); text-wrap: balance; }
 .reach-join .btn-mint { margin-top: 8px; }
-.reach-contact { font-size: 15px !important; }
-.reach-contact a { color: var(--mint); text-decoration: underline; text-underline-offset: 3px; }
 
 @media (max-width: 640px) {
   .reach-hero { min-height: 78vh; }
@@ -66,3 +73,9 @@
   .reach-pillars { padding-bottom: 96px; }
   .reach-join-inner { padding-top: 96px; padding-bottom: 96px; }
 }
+
+/* Orbit art on the first pillar: points circling a glowing core */
+.tile-art .orb { transform-origin: 150px 112px; animation: orb linear infinite; }
+@keyframes orb { to { transform: rotate(360deg); } }
+.tile-art .core { transform-origin: 150px 112px; animation: core 2.6s ease-in-out infinite alternate; }
+@keyframes core { from { transform: scale(.8); opacity: .65; } to { transform: scale(1.2); opacity: 1; } }

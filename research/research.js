@@ -209,6 +209,23 @@
       }
       return s;
     },
+    // points circling a glowing core, each ring at its own speed and direction
+    orbit() {
+      const s = svg(300, 300), cx = 150, cy = 112;
+      add(s, 'circle', { cx, cy, r: 46, fill: 'rgba(142,77,255,.28)', class: 'core' });
+      add(s, 'circle', { cx, cy, r: 13, fill: '#cffadf', class: 'core' });
+      [[40, 2, 9, 1], [70, 3, 15, -1], [102, 4, 23, 1], [136, 5, 34, -1]].forEach(([r, n, secs, dir], k) => {
+        add(s, 'circle', { cx, cy, r, fill: 'none', stroke: '#b592ff', 'stroke-opacity': .34 - k * .05, 'stroke-width': 1 });
+        const g = add(s, 'g', { class: 'orb' });
+        g.style.animationDuration = secs + 's';
+        if (dir < 0) g.style.animationDirection = 'reverse';
+        for (let i = 0; i < n; i++) {
+          const a = (i / n) * Math.PI * 2 + k;
+          add(g, 'circle', { cx: cx + Math.cos(a) * r, cy: cy + Math.sin(a) * r, r: i === 0 ? 4.6 : 2.8, fill: i === 0 ? '#cffadf' : '#b592ff' });
+        }
+      });
+      return s;
+    },
     // rising columns
     columns() {
       const s = svg(300, 300), hs = [.3, .42, .36, .55, .5, .7, .64, .86];
