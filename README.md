@@ -29,7 +29,8 @@ Only two things on the home page send visitors to arulhealth.com, both in a new 
 | "Up next" chain only (the "Our work" grid was removed) | `clinical-trials`, `rides-and-lodging`, `financial-aid`, `denials-and-appeals`, `pediatric-cancer`, `metastatic-breast-cancer`, `peer-navigators`, `medical-records` |
 | The three focus cards | `access-to-care`, `healthy-habits`, `stronger-communities` |
 | "Up next" chain only | `get-started` (contact by email to support@arulhealth.com) |
-| Footer: About Arul Health, Help | `about`, `help` |
+| Footer: Help | `help` |
+| "Up next" chain and `/#about` only ("Read our story", the story photo and the footer's "Our story" open `arulhealth.com/about` in a new tab) | `about` |
 
 How it works:
 
