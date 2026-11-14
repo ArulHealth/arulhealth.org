@@ -9,6 +9,9 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
+  // Section headings fade up as they arrive (marked before the observer below picks them up).
+  $$('.paper .sec-head').forEach((el) => el.classList.add('reveal'));
+
   // ---- Reveal + count-up ------------------------------------------------
   function countUp(el) {
     const to = parseFloat(el.dataset.count);
@@ -123,6 +126,39 @@
     window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     window.addEventListener('resize', update);
     update();
+  }
+
+  // ---- Scroll-linked pieces: timeline rail, hero photo drift ---------------
+  // The timeline's rail fills as the reader scrolls through it, and each
+  // event switches on when the fill reaches its pin. The hero photo drifts
+  // a few pixels against the scroll. Both run off one rAF-throttled handler.
+  const tracks = $$('[data-track]');
+  const drift = $$('[data-parallax]');
+  if (tracks.length || drift.length) {
+    if (reduce) {
+      tracks.forEach((tl) => { tl.style.setProperty('--p', 1); $$('li', tl).forEach((li) => li.classList.add('is-on')); });
+    } else {
+      let queued = false;
+      const run = () => {
+        queued = false;
+        const line = window.innerHeight * 0.74;   // the fill's leading edge sits here on screen
+        tracks.forEach((tl) => {
+          const r = tl.getBoundingClientRect();
+          const p = Math.max(0, Math.min(1, (line - r.top - 10) / Math.max(1, r.height - 44)));
+          tl.style.setProperty('--p', p.toFixed(4));
+          $$('li', tl).forEach((li) => li.classList.toggle('is-on', li.getBoundingClientRect().top + 12 <= line));
+        });
+        drift.forEach((img) => {
+          const r = img.parentElement.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > window.innerHeight) return;
+          const k = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;   // -0.5 to 0.5
+          img.style.transform = `translate3d(0, ${(k * -26).toFixed(1)}px, 0) scale(1.08)`;
+        });
+      };
+      window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(run); } }, { passive: true });
+      window.addEventListener('resize', run);
+      run();
+    }
   }
 
   // ---- Tooltips on chart marks -------------------------------------------

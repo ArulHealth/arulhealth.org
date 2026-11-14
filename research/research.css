@@ -183,6 +183,18 @@ a.tile:hover .tile-go::after { transform: translateX(4px); }
 @keyframes cue { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
 .hero-fig { margin: 0; }
+/* Paper hero with a photo: the call card overlaps the lower part of the photo */
+.hero-stack { position: relative; }
+.hero-photo { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--night-2); }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 42% 40%; transform: scale(1.08); will-change: transform; }
+.hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18, 10, 42, 0.9) 4%, rgba(18, 10, 42, 0.15) 55%, rgba(124, 58, 237, 0.18)); pointer-events: none; }
+.hero-stack .call { position: relative; margin: -132px 20px 0; padding: 22px 24px; background: rgba(28, 18, 64, 0.82); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7); }
+.hero-stack .call .wave { height: 56px; margin-top: 16px; }
+.hero-stack .call .checks { margin-top: 16px; }
+.hero-stack .call .checks li { padding: 9px 0; font-size: 14px; }
+@media (max-width: 900px) { .hero-stack { max-width: 520px; } .hero-stack .call { margin: -96px 12px 0; padding: 18px; } }
+.call-top b, .call-top span { white-space: nowrap; }
+@media (max-width: 480px) { .call-top { font-size: 10.5px; letter-spacing: .05em; } }
 .hero-fig figcaption { margin-top: 16px; font-family: var(--font-mono); font-size: 12px; line-height: 18px; color: var(--night-ink-2); }
 .hero-fig figcaption b { color: var(--mint); font-weight: 500; }
 .dots { display: grid; grid-template-columns: repeat(var(--cols, 20), 1fr); gap: var(--gap, 5px); }
@@ -445,10 +457,20 @@ sup.ref a:hover { text-decoration: underline; }
 .timeline time { font-family: var(--font-mono); font-size: 12px; line-height: 22px; letter-spacing: .04em; color: var(--ink-2); text-align: right; }
 .timeline .pin { position: relative; }
 .timeline .pin::before { content: ""; position: absolute; left: 4px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--k, var(--c-all)); box-shadow: 0 0 0 2px var(--paper); z-index: 1; }
-.timeline li:not(:last-child) .pin::after { content: ""; position: absolute; left: 9px; top: 12px; bottom: -24px; width: 2px; background: var(--rule); }
+/* One rail runs the height of the timeline; its violet fill follows the
+   reader's scroll (research.js sets --p from 0 to 1), and each event wakes up
+   as the fill reaches it. Without JS the rail is full and every event shows. */
+.timeline { position: relative; --rail: 145px; }
+.timeline::before, .timeline::after { content: ""; position: absolute; left: var(--rail); top: 10px; bottom: 34px; width: 2px; border-radius: 1px; }
+.timeline::before { background: var(--rule); }
+.timeline::after { background: linear-gradient(var(--c-few), var(--c-action)); transform-origin: 50% 0; transform: scaleY(var(--p, 1)); }
+.js .timeline[data-track] li { opacity: .42; transition: opacity .5s var(--ease); }
+.js .timeline[data-track] li .pin::before { transform: scale(.7); transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+.js .timeline[data-track] li.is-on { opacity: 1; }
+.js .timeline[data-track] li.is-on .pin::before { transform: scale(1); box-shadow: 0 0 0 2px var(--paper), 0 0 0 6px rgba(124, 58, 237, 0.14); }
 .timeline b { display: block; font-weight: 500; font-size: 15px; line-height: 22px; color: var(--heading); }
 .timeline span { display: block; font-size: 14px; line-height: 21px; color: var(--ink-2); margin-top: 2px; }
-@media (max-width: 640px) { .timeline li { grid-template-columns: 20px minmax(0, 1fr); } .timeline time { grid-column: 2; text-align: left; order: -1; } .timeline .pin { grid-row: 1 / span 2; } }
+@media (max-width: 640px) { .timeline { --rail: 9px; } .timeline li { grid-template-columns: 20px minmax(0, 1fr); } .timeline time { grid-column: 2; text-align: left; order: -1; } .timeline .pin { grid-row: 1 / span 2; } }
 
 /* ---------- Matrix (checks x what they prove) ---------- */
 .matrix-wrap { overflow-x: auto; }
@@ -489,6 +511,28 @@ sup.ref a:hover { text-decoration: underline; }
 .refs li:target { background: #f1ebff; border-radius: 6px; }
 .refs a { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
 .refs em { font-style: normal; color: var(--ink-3); }
+
+/* ---------- Subtle scroll animation ----------
+   Everything here only fades or slides a few pixels, once, as it enters.
+   styles.css switches transitions off under prefers-reduced-motion. */
+.js .stats .stat { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.js .stats .stat:nth-child(2) { transition-delay: .12s; }
+.js .stats .stat:nth-child(3) { transition-delay: .24s; }
+.js .stats.is-in .stat { opacity: 1; transform: none; }
+.js .fig tbody tr { opacity: 0; transform: translateY(8px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+.js .fig.is-in tbody tr { opacity: 1; transform: none; }
+.js .fig tbody tr:nth-child(2) { transition-delay: .08s; }
+.js .fig tbody tr:nth-child(3) { transition-delay: .16s; }
+.js .fig tbody tr:nth-child(4) { transition-delay: .24s; }
+.js .fig tbody tr:nth-child(5) { transition-delay: .32s; }
+.js .fig tbody tr:nth-child(6) { transition-delay: .4s; }
+.js .dial li.reveal:nth-child(2), .js .order li.reveal:nth-child(2), .js .voices .reveal:nth-child(2) { transition-delay: .1s; }
+.js .dial li.reveal:nth-child(3), .js .order li.reveal:nth-child(3), .js .voices .reveal:nth-child(3) { transition-delay: .2s; }
+.js .dial li.reveal:nth-child(4), .js .order li.reveal:nth-child(4) { transition-delay: .3s; }
+.js .fig { transition: box-shadow .8s var(--ease); }
+.js .fig.is-in { box-shadow: 0 30px 60px -48px rgba(29, 19, 64, 0.45); }
+.js .sec-head .sec-num::after { width: 0; transition: width .9s var(--ease) .15s; }
+.js .sec-head.is-in .sec-num::after { width: 48px; }
 
 /* Tooltip for chart marks */
 .tip { position: fixed; z-index: 60; pointer-events: none; max-width: 260px; padding: 8px 12px; border-radius: 8px; background: var(--heading); color: #fff; font-size: 13px; line-height: 18px; box-shadow: 0 8px 24px -8px rgba(18, 10, 42, 0.5); opacity: 0; transform: translateY(4px); transition: opacity .15s, transform .15s; }
