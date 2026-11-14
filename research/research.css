@@ -28,6 +28,9 @@
   --ease: cubic-bezier(.2, .8, .2, 1);
 }
 
+/* Nothing on a research page may widen the page (body alone does not stop
+   sideways panning on phones). */
+html { overflow-x: clip; }
 .mono { font-family: var(--font-mono); font-feature-settings: "zero" 1; }
 .label {
   font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 500;
@@ -293,6 +296,10 @@ a.tile:hover .tile-go::after { transform: translateX(4px); }
 .hours .seg span { font-family: var(--font-text); font-size: 12px; opacity: .92; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 .hours-band { position: absolute; top: 0; left: calc(2 / 7 * 100%); width: calc(1 / 7 * 100%); height: calc(100% - 28px); border-inline: 1px dashed var(--ink-3); background: repeating-linear-gradient(135deg, rgba(29, 19, 64, 0.06) 0 6px, transparent 6px 12px); pointer-events: none; }
 .hours-band span { position: absolute; top: 0; left: calc(100% + 10px); font-family: var(--font-mono); font-size: 11px; line-height: 14px; color: var(--ink-2); white-space: nowrap; }
+/* Axis under a .bars chart: lines up with the track, and drops the offsets
+   when the bars stack on phones (fixed offsets pushed it past the screen edge). */
+.axis-bars { margin-left: calc(var(--lab, 190px) + 16px); margin-right: 72px; }
+@media (max-width: 640px) { .axis-bars { margin-left: 0; margin-right: 64px; } }
 .axis { display: flex; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--rule); font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); }
 @media (max-width: 640px) { .hours .seg span { display: none; } .hours .seg { padding-left: 8px; } .hours-band span { font-size: 10px; line-height: 13px; left: calc(100% + 6px); white-space: normal; width: 96px; } .hours { padding-top: 52px; } }
 
@@ -391,9 +398,6 @@ a.tile:hover .tile-go::after { transform: translateX(4px); }
 .paper-end a { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px 22px; border-radius: 12px; background: var(--mint); color: #0b2a16; font-weight: 500; }
 .paper-end a:hover { background: #fff; }
 
-/* ---------- Draft markers (remove before publishing) ---------- */
-.draft-bar { background: #ffe9a8; color: #3d2c00; font-family: var(--font-mono); font-size: 12px; line-height: 18px; letter-spacing: .04em; text-align: center; padding: 8px 16px; }
-.tbc { background: #fff3c4; color: #3d2c00; border-radius: 4px; padding: 1px 6px; font-family: var(--font-mono); font-size: .72em; letter-spacing: .02em; white-space: nowrap; vertical-align: 1px; }
 sup.ref { font-family: var(--font-mono); font-size: .62em; margin-left: 1px; }
 sup.ref a { color: var(--accent-hover); text-decoration: none; padding: 0 1px; }
 sup.ref a:hover { text-decoration: underline; }

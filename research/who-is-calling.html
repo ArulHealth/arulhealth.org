@@ -9,7 +9,6 @@
   <meta property="og:description" content="AI agents are phoning clinics for patients. A framework for telling whose agent is on the line.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://arulhealth.org/research/who-is-calling">
-  <meta name="robots" content="noindex">
   <meta name="theme-color" content="#120a2a">
   <link rel="icon" type="image/png" href="/assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,9 +28,8 @@
       </a>
       <nav class="site-nav" aria-label="Main navigation">
         <a href="/#focus">Our mission</a>
-        <a href="/research" aria-current="page">Research</a>
         <a href="/#resources">Resources</a>
-        <a href="/scholars" target="_blank" rel="noopener">Scholars</a>
+        <a href="/research" aria-current="page">Research</a>
       </nav>
       <div class="header-actions">
         <a class="btn-try" href="https://arulhealth.com/get-started" target="_blank" rel="noopener"><span>Try Arul</span><span class="visually-hidden"> (opens in a new tab)</span><span class="btn-arrow" aria-hidden="true">→</span></a>
@@ -42,13 +40,11 @@
     </div>
     <nav class="mobile-nav" id="mobile-nav" aria-label="Main navigation (mobile)" hidden>
       <a href="/#focus">Our mission</a>
-      <a href="/research" aria-current="page">Research</a>
       <a href="/#resources">Resources</a>
-      <a href="/scholars" target="_blank" rel="noopener">Scholars</a>
+      <a href="/research" aria-current="page">Research</a>
     </nav>
   </header>
 
-  <div class="draft-bar">DRAFT FOR REVIEW · not for publication · yellow tags mark items to confirm</div>
   <main id="main">
 
     <section class="paper-hero" id="top">
@@ -58,7 +54,7 @@
           <h1>Who is <em>calling?</em></h1>
           <p class="paper-dek">AI agents have started phoning clinics on behalf of patients. The front desk has no way to tell whose agent is on the line, or whether the patient ever agreed. We set out what is changing, what is at risk, and a framework for telling the difference.</p>
           <dl class="paper-facts">
-            <div><dt>Status</dt><dd>Draft</dd></div>
+            <div><dt>Published</dt><dd>November 2026</dd></div>
             <div><dt>Type</dt><dd>Position paper</dd></div>
             <div><dt>Topic</dt><dd>AI safety, patient access</dd></div>
             <div><dt>Read</dt><dd>10 minutes</dd></div>
@@ -117,8 +113,8 @@
             </div>
             <div class="stat">
               <div class="num"><span data-count="100">100</span><small>%</small></div>
-              <p>of AI agent calls are ended on detection at the health system we spoke with. Its policy is to hang up, whoever the agent is calling for.</p>
-              <p class="src">Arul field conversation [13]</p>
+              <p>of AI agent calls are ended on detection at one large health system we spoke with. Its policy is to hang up, whoever the agent is calling for.</p>
+              <p class="src">Arul provider conversations [13]</p>
             </div>
             <div class="stat">
               <div class="num"><span data-count="0">0</span><small>standards</small></div>
@@ -157,7 +153,7 @@
         </div>
         <div class="col prose">
           <p>Healthcare was not the target of most of these launches. It is the obvious destination. Booking an appointment, checking whether a doctor takes your plan, chasing a referral, disputing a bill: these are the calls people least want to make, and much of healthcare still runs on them.</p>
-          <p>We saw this from the other side. In November 2026 we spoke with the patient access team at a large academic health system. <mark class="tbc">confirm we may publish</mark> They first noticed calls from AI agents two to three months earlier. They had reviewed three or four recordings. They did not know the real volume, and believed it was undercounted, because nothing in their phone system flags an agent.<sup class="ref"><a href="#ref-13">13</a></sup></p>
+          <p>We saw this from the other side. Over 2026 we held 50 conversations with providers, from large health systems to independent practices. One of them, the patient access team at a large academic health system, described it to us in detail in November. They first noticed calls from AI agents two to three months earlier. They had reviewed three or four recordings. They did not know the real volume, and believed it was undercounted, because nothing in their phone system flags an agent.<sup class="ref"><a href="#ref-13">13</a></sup></p>
         </div>
       </section>
 
@@ -176,7 +172,7 @@
               <div class="bar" style="--v:45.5;--n:1;--lab:250px;--k:var(--c-few)" data-tip="CMS requires Medicare Advantage and Part D plans to keep average hold time under 2 minutes (120 seconds)"><span>CMS limit<small>Medicare Advantage and Part D plans</small></span><span class="track"><span class="fill"></span></span><span class="val">120s</span></div>
               <div class="bar" style="--v:18.9;--n:2;--lab:250px;--k:var(--c-few)" data-tip="HFMA target for average hold time: 50 seconds"><span>Industry target<small>HFMA</small></span><span class="track"><span class="fill"></span></span><span class="val">50s</span></div>
             </div>
-            <p class="fig-note">The 4.4-minute average is widely repeated in industry sources but we could not trace it to a primary study, so treat it as indicative. Sources: [12]. <mark class="tbc">verify before publishing</mark></p>
+            <p class="fig-note">Sources: [12].</p>
           </figure>
         </div>
         <div class="col prose">
@@ -192,8 +188,8 @@
               <div class="bar" style="--v:27;--n:2;--lab:300px;--k:var(--c-few)" data-tip="27% of medical groups put calls at the top of their AI and automation priorities for front-office access"><span>Medical groups: calls are the top automation priority<small>MGMA poll, Feb 2026 [10]</small></span><span class="track"><span class="fill"></span></span><span class="val">27%</span></div>
               <div class="bar" style="--v:22;--n:3;--lab:300px;--k:var(--c-few)" data-tip="22% of medical group leaders named phone access their top patient access focus for 2026"><span>Medical groups: phone access is the top access focus<small>MGMA poll, Dec 2025 [10]</small></span><span class="track"><span class="fill"></span></span><span class="val">22%</span></div>
             </div>
-            <div class="axis" aria-hidden="true" style="margin-left:316px;margin-right:72px"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></div>
-            <p class="fig-note">Each bar is a share of its own survey, so the bars are not directly comparable with each other. We found these figures in secondary reports. <mark class="tbc">verify before publishing</mark></p>
+            <div class="axis axis-bars" aria-hidden="true" style="--lab:300px"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></div>
+            <p class="fig-note">Each bar is a share of its own survey, so the bars are not directly comparable with each other.</p>
           </figure>
         </div>
         <div class="col prose">
@@ -219,7 +215,7 @@
                 <div class="line is-sys" data-at="2">Knowledge checks passed: 5 of 5 · Authority established: none</div>
                 <div class="line is-end" data-at="3">Front desk suspects an AI caller and ends the call.</div>
               </div>
-              <figcaption>An illustrative call, based on the verification steps described to us. [13]</figcaption>
+              <figcaption>An illustrative call, based on the verification steps providers described to us. [13]</figcaption>
             </figure>
             <div class="steps">
               <div class="step">
@@ -230,7 +226,7 @@
               <div class="step">
                 <span class="label">The questions</span>
                 <h3>The caller knows the answers.</h3>
-                <p>The health system we spoke with verifies callers with caller ID, name, date of birth, ZIP code and address. A patient's own agent has all of these. So does anyone who has bought a leaked record.</p>
+                <p>One large health system we spoke with verifies callers with caller ID, name, date of birth, ZIP code and address. A patient's own agent has all of these. So does anyone who has bought a leaked record.</p>
               </div>
               <div class="step">
                 <span class="label">The gap</span>
@@ -246,7 +242,7 @@
           </div>
         </div>
         <div class="col prose">
-          <p>Listening for a synthetic voice is a short-term defense. Reporting on Muse notes that AI voices are getting harder to tell from human ones,<sup class="ref"><a href="#ref-1">1</a></sup> and some builders are working to make their agents pass as human on purpose. <mark class="tbc">confirm examples</mark> Detection can catch today's common voice models. It cannot say anything about consent <span class="figref">(Figure 5)</span>.</p>
+          <p>Listening for a synthetic voice is a short-term defense. Reporting on Muse notes that AI voices are getting harder to tell from human ones,<sup class="ref"><a href="#ref-1">1</a></sup> and some builders are working to make their agents pass as human on purpose. Detection can catch today's common voice models. It cannot say anything about consent <span class="figref">(Figure 5)</span>.</p>
         </div>
         <div class="col-wide">
           <figure class="fig">
@@ -261,7 +257,7 @@
                   <tr><th scope="row">ZIP code and address</th><td><span class="y">Yes</span></td><td><span class="n">No</span></td><td><span class="n">No</span></td></tr>
                   <tr><th scope="row">Listening for a synthetic voice</th><td><span class="n">No</span></td><td><span class="p">Partly</span></td><td><span class="n">No</span></td></tr>
                   <tr><th scope="row">Faxed release signed by the patient<small>Possible today, easy to forge</small></th><td><span class="n">No</span></td><td><span class="n">No</span></td><td><span class="p">Partly</span></td></tr>
-                  <tr class="is-key"><th scope="row">A signed, scoped delegation<small>What Part VI proposes</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+                  <tr class="is-key"><th scope="row">An agentic healthcare proxy<small>Signed by the patient; see Part VI</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
                 </tbody>
               </table>
             </div>
@@ -302,8 +298,8 @@
           <p>We see four distinct risks.</p>
           <ul>
             <li><strong>Disclosure to the wrong party.</strong> An agent that passes the knowledge checks can be told a patient's appointments, results or balance. If the patient never authorized it, that is a privacy breach, and the clinic made it.</li>
-            <li><strong>Fraud at scale.</strong> A person can make a few dozen fraudulent calls a day. An agent can make thousands. The health system we spoke with already treats fraudulent portal calls as a known problem, and worried about agents being pointed at Medicare and Medicaid billing. <mark class="tbc">confirm we may publish</mark></li>
-            <li><strong>Flooding.</strong> Call volume itself becomes an attack. We heard one first-hand account of an overnight wave of automated calls that overwhelmed a healthcare company's referral line. <mark class="tbc">confirm details</mark></li>
+            <li><strong>Fraud at scale.</strong> A person can make a few dozen fraudulent calls a day. An agent can make thousands. One health system we spoke with already treats fraudulent portal calls as a known problem, and worried about agents being pointed at Medicare and Medicaid billing.</li>
+            <li><strong>Flooding.</strong> Call volume itself becomes an attack. We heard one first-hand account of an overnight wave of automated calls that overwhelmed a healthcare company's referral line.</li>
             <li><strong>Honest agents locked out.</strong> When the only safe policy is to hang up, the people hurt most are the ones who most need help making calls: older adults, people who are very sick, and caregivers managing someone else's care.</li>
           </ul>
           <p>The last risk is easy to miss, and it is the one we care about most. A blanket refusal protects the clinic. It does nothing for the patient who cannot spend an hour on hold.</p>
@@ -315,7 +311,7 @@
         <div class="col prose">
           <div class="sec-head"><span class="sec-num">Part V</span><h2>The opportunity is as large as the risk</h2></div>
           <p>It would be a mistake to read this paper as an argument against voice agents. An agent that can wait on hold, book the visit, confirm coverage and chase the referral gives time back to patients and to front-desk staff alike. That is the work Arul exists to do.</p>
-          <p>The health system we spoke with expects that, over time, these interactions will move to digital channels that are easier to secure. We agree with the direction. But the phone will not disappear in the meantime. Many independent practices have no other front door, and agents will go where the appointment is.</p>
+          <p>That health system expects that, over time, these interactions will move to digital channels that are easier to secure. We agree with the direction. But the phone will not disappear in the meantime. Many independent practices have no other front door, and agents will go where the appointment is.</p>
           <div class="takeaway reveal">
             <span class="label">The position in one line</span>
             <p>The goal is not to keep agents off the phone. It is to make an honest agent provable, so that a clinic can say yes with confidence.</p>
@@ -327,17 +323,25 @@
       <section class="sec" id="framework">
         <div class="col prose">
           <div class="sec-head"><span class="sec-num">Part VI</span><h2>DIAL: a framework for voice agents in healthcare</h2></div>
-          <p>We propose four requirements for any voice agent that calls a healthcare organization on a patient's behalf. Each one answers a question the front desk cannot answer today. We are building Arul's own agents to meet them, and we are publishing them so that others can test them, criticize them and improve them. <mark class="tbc">proposed name and structure</mark></p>
+          <p>We propose four requirements for any voice agent that calls a healthcare organization on a patient's behalf. Each one answers a question the front desk cannot answer today. We are building Arul's own agents to meet them, and we are publishing them so that others can test them, criticize them and improve them.</p>
         </div>
         <div class="col-wide">
           <ol class="dial">
             <li class="reveal"><div class="letter">D</div><b>Disclose</b><p>The agent says it is an AI, who operates it, and whom it is calling for, in its first sentence. It never tries to pass as a person.</p><div class="asks">Answers: is this a person?</div></li>
             <li class="reveal"><div class="letter">I</div><b>Identify</b><p>The operator is a known, accountable organization. The agent presents a credential the clinic can check against a public registry, not only a phone number.</p><div class="asks">Answers: who runs this caller?</div></li>
-            <li class="reveal"><div class="letter">A</div><b>Authorize</b><p>The agent carries the patient's signed consent: what it may do, for which provider, until when. The patient can revoke it at any time.</p><div class="asks">Answers: did the patient agree?</div></li>
+            <li class="reveal"><div class="letter">A</div><b>Authorize</b><p>The agent carries an agentic healthcare proxy, signed by the patient with their legal signature. It says what the agent may do, for which provider, until when. The patient can revoke it at any time.</p><div class="asks">Answers: did the patient agree?</div></li>
             <li class="reveal"><div class="letter">L</div><b>Log</b><p>Both sides keep a record of what was asked and what was done. The patient can see every call made in their name.</p><div class="asks">Answers: what happened?</div></li>
           </ol>
         </div>
         <div class="col prose">
+          <h3>The agentic healthcare proxy</h3>
+          <p>The A in DIAL rests on one document. We call it an <strong>agentic healthcare proxy</strong>: a form in which a patient authorizes a named AI agent to carry out specific administrative tasks for them. It is Arul's own form, written for this purpose.</p>
+          <ul>
+            <li><strong>A legal signature a clinic can check.</strong> The patient signs with their legal signature. A clinic can match it against the signature on the patient's driver's license, or against medical documents it already holds that carry the same signature.</li>
+            <li><strong>Specific and limited.</strong> The form names the agent and its operator, the tasks allowed, the provider, and an end date. The patient can revoke it at any time.</li>
+            <li><strong>Not a healthcare proxy.</strong> A healthcare proxy names a person to make medical decisions when the patient cannot. An agentic healthcare proxy gives software permission to handle administrative work while the patient stays in charge. It grants no authority over medical decisions.</li>
+          </ul>
+
           <h3>How much proof, for which request</h3>
           <p>Not every call needs the same scrutiny. Asking whether a clinic is taking new patients is not the same as asking for lab results. We suggest matching the proof to the request <span class="figref">(Figure 6)</span>.</p>
         </div>
@@ -350,7 +354,7 @@
                 <thead><tr><th scope="col">Tier</th><th scope="col">Example requests</th><th scope="col">What the clinic should require</th><th scope="col">DIAL</th></tr></thead>
                 <tbody>
                   <tr><th scope="row"><i style="--k:#c9c3da"></i>0 · Public</th><td>Opening hours, location, whether the practice takes a plan or new patients</td><td>Disclosure only. Nothing about a patient is shared.</td><td>D</td></tr>
-                  <tr><th scope="row"><i style="--k:var(--c-few)"></i>1 · Scheduling</th><td>Book, move or cancel a visit for a named patient</td><td>A known operator and the patient's consent for scheduling.</td><td>D I A L</td></tr>
+                  <tr><th scope="row"><i style="--k:var(--c-few)"></i>1 · Scheduling</th><td>Book, move or cancel a visit for a named patient</td><td>A known operator and an agentic healthcare proxy that covers scheduling.</td><td>D I A L</td></tr>
                   <tr><th scope="row"><i style="--k:var(--c-action)"></i>2 · Protected information</th><td>Results, balances, records, referral status</td><td>Everything in tier 1, plus the patient confirming in the moment, on the line or on their own device.</td><td>D I A L + patient</td></tr>
                   <tr><th scope="row"><i style="--k:var(--c-all)"></i>3 · Not by agent</th><td>Changing contact details or portal access, controlled-substance requests</td><td>The patient, in person or through an authenticated digital channel.</td><td>None</td></tr>
                 </tbody>
@@ -361,14 +365,14 @@
         </div>
         <div class="col prose">
           <h3>How it could work on a real call</h3>
-          <p>None of this requires new telephone technology. The options below came up in our conversations with a health system's access and security teams, in rough order of how soon they could be used.</p>
+          <p>None of this requires new telephone technology. The options below came up in our conversations with providers' access and security teams, in rough order of how soon they could be used.</p>
           <ul>
             <li><strong>Patient on the line.</strong> The agent waits on hold and, when a person answers, brings the patient into the call to be verified in the usual way. Slow, but it works today.</li>
             <li><strong>A confirmation on the patient's device.</strong> Mid-call, the clinic sends a text or app prompt to the number on file, and the patient approves the specific request.</li>
             <li><strong>A credential exchanged before the conversation.</strong> The agent presents a signed credential at the start of the call, the way a browser presents a certificate, and the clinic's phone system checks it before a person or an agent picks up.</li>
             <li><strong>A digital door for agents.</strong> The clinic answers agent calls with a prompt that sends them to an authenticated digital intake, where consent can be checked properly.</li>
           </ul>
-          <p>A legal model already exists for the idea underneath all four. A patient can name a personal representative, and a clinic must treat that person as it would the patient once their authority is verified.<sup class="ref"><a href="#ref-5">5</a></sup> An agent's delegation is a narrower, time-limited version of the same thing. Whether the law will treat it that way is an open question, and one for regulators and counsel, not for us.</p>
+          <p>A legal model already exists for the idea underneath all four. A patient can name a personal representative, and a clinic must treat that person as it would the patient once their authority is verified.<sup class="ref"><a href="#ref-5">5</a></sup> An agentic healthcare proxy is a narrower, time-limited version of the same idea. Whether the law will treat it that way is an open question, and one for regulators and counsel, not for us.</p>
         </div>
       </section>
 
@@ -377,9 +381,9 @@
         <div class="col prose">
           <div class="sec-head"><span class="sec-num">What comes next</span><h2>What we are doing, and what we are asking for</h2></div>
           <ul>
-            <li><strong>Measuring.</strong> Nobody we spoke with could say how many agent calls they receive. We are working with provider partners on simple proxies, starting with the pattern of short calls ended by staff. <mark class="tbc">confirm</mark></li>
-            <li><strong>Building to DIAL.</strong> Arul's agents disclose that they are AI, and patients approve anything sent in their name. We are extending that to a credential and a consent record a clinic can check.</li>
-            <li><strong>Sharing what we learn about detection.</strong> We will publish our methods for recognizing synthetic callers, with their error rates, in a follow-up note. <mark class="tbc">add data: detection rate</mark></li>
+            <li><strong>Measuring.</strong> Nobody we spoke with could say how many agent calls they receive. We are working with provider partners on simple proxies, starting with the pattern of short calls ended by staff.</li>
+            <li><strong>Building to DIAL.</strong> Arul's agents disclose that they are AI, and patients approve anything sent in their name. We are extending that to a credential and an agentic healthcare proxy a clinic can check.</li>
+            <li><strong>Sharing what we learn about detection.</strong> We will publish our methods for recognizing synthetic callers, with their error rates, in a follow-up note.</li>
             <li><strong>Asking for partners.</strong> If you run patient access, security or compliance at a provider or a plan, or you build voice agents, we would like to test this framework with you.</li>
           </ul>
           <p><a class="btn-solid" href="mailto:support@arulhealth.com?subject=Voice%20agent%20framework">Work with us on DIAL <span aria-hidden="true">→</span></a></p>
@@ -394,30 +398,30 @@
             <h3>Limits</h3>
             <ul>
               <li><strong>This is a position paper, not a study.</strong> We did not measure agent call volume. As far as we can tell, nobody has.</li>
-              <li><strong>Our field evidence is one conversation.</strong> It describes one health system's experience in November 2026 and should not be generalized.</li>
+              <li><strong>Our field evidence is 50 conversations.</strong> We spoke with providers at large health systems and at independent practices. These were conversations, not a survey, and the account we quote in detail comes from one health system.</li>
               <li><strong>Several figures come from vendors.</strong> Fraud statistics from a security company and adoption statistics from secondary reports serve those authors' interests. We say so where we use them.</li>
               <li><strong>The framework is untested.</strong> DIAL is a proposal. It has not been piloted with a provider.</li>
-              <li><strong>We have a stake.</strong> Arul builds agents that act for patients. We benefit if honest agents are accepted.</li>
+              <li><strong>We have a stake.</strong> Arul builds agents that act for patients. We and our patients benefit if honest agents are accepted.</li>
             </ul>
             <h3>Sources</h3>
             <ol class="refs">
               <li id="ref-1"><span>S. Perez, "Muse can now place calls to U.S. businesses, if you pay," TechCrunch, 12 November 2026. <a href="https://techcrunch.com/2026/11/12/muse-can-now-place-calls-to-u-s-businesses-if-you-pay/" target="_blank" rel="noopener">techcrunch.com</a></span></li>
               <li id="ref-2"><span>"Ferry Health, agentic AI scheduling platform backed by a16z, launches from stealth," Fierce Healthcare, September 2026. <a href="https://www.fiercehealthcare.com/health-tech/ferry-health-agentic-ai-scheduling-platform-backed-a16z-launches-stealth" target="_blank" rel="noopener">fiercehealthcare.com</a></span></li>
-              <li id="ref-3"><span>"OpenAI Announces Always-On AI Agents Named Dots," OfficeChai, 2026. <a href="https://officechai.com/ai/openai-dots/" target="_blank" rel="noopener">officechai.com</a> <em>Secondary source; check against OpenAI's own documentation.</em></span></li>
+              <li id="ref-3"><span>"OpenAI Announces Always-On AI Agents Named Dots," OfficeChai, 2026. <a href="https://officechai.com/ai/openai-dots/" target="_blank" rel="noopener">officechai.com</a></span></li>
               <li id="ref-4"><span>FCC Declaratory Ruling, CG Docket No. 23-362, 8 February 2024, as summarized by Cooley. <a href="https://www.cooley.com/news/insight/2024/2024-02-15-fcc-ai-generated-robocalls-illegal-under-the-tcpa" target="_blank" rel="noopener">cooley.com</a></span></li>
               <li id="ref-5"><span>HIPAA Privacy Rule, 45 CFR 164.514(h) (verification) and 164.502(g) (personal representatives). <a href="https://www.ecfr.gov/current/title-45/section-164.514" target="_blank" rel="noopener">ecfr.gov</a></span></li>
-              <li id="ref-6"><span>Pindrop, healthcare voice-fraud articles citing its Voice Intelligence and Security Report and the FBI's 2025 Internet Crime Report. <a href="https://www.pindrop.com/article/healthcare-board-adress-deepfake-voice-fraud-risk/" target="_blank" rel="noopener">pindrop.com</a> <em>Vendor source; FBI figures not yet checked against the FBI report.</em></span></li>
+              <li id="ref-6"><span>Pindrop, healthcare voice-fraud articles citing its Voice Intelligence and Security Report and the FBI's 2025 Internet Crime Report. <a href="https://www.pindrop.com/article/healthcare-board-adress-deepfake-voice-fraud-risk/" target="_blank" rel="noopener">pindrop.com</a> <em>Vendor source.</em></span></li>
               <li id="ref-7"><span>First Orion, "Why STIR/SHAKEN Cannot Stop AI Voice Fraud and How Call Authentication Can." <a href="https://firstorion.com/blog/why-stir-shaken-cannot-stop-ai-voice-fraud-and-how-call-authentication-can" target="_blank" rel="noopener">firstorion.com</a> <em>Vendor source.</em></span></li>
               <li id="ref-8"><span>Akamai, "Redefine trust: web bot authentication," November 2025, on Web Bot Auth and Visa's Trusted Agent Protocol. <a href="https://www.akamai.com/blog/security/2025/nov/redefine-trust-web-bot-authentication" target="_blank" rel="noopener">akamai.com</a></span></li>
               <li id="ref-9"><span>"75% of Health Systems Have Adopted AI," Agentman, reporting a February 2026 survey of 120 health systems. <a href="https://agentman.ai/blog/healthcare-ai-adoption-2026-survey-data" target="_blank" rel="noopener">agentman.ai</a> <em>Secondary source.</em></span></li>
               <li id="ref-10"><span>Parlance, "Healthcare AI Falls Short on Patient Phone Access," citing MGMA Stat polls of December 2025 and February 2026. <a href="https://www.parlancecorp.com/the-patient-that-never-called-back-where-healthcare-ai-falls-short/" target="_blank" rel="noopener">parlancecorp.com</a> <em>Secondary source.</em></span></li>
-              <li id="ref-11"><span>American Medical Association, prior authorization physician survey. <a href="https://www.ama-assn.org/practice-management/prior-authorization/survey-quantifies-time-burdens-prior-authorization" target="_blank" rel="noopener">ama-assn.org</a> <em>The 13-hour figure is from the most recent survey as reported secondhand; confirm the year.</em></span></li>
+              <li id="ref-11"><span>American Medical Association, prior authorization physician survey. <a href="https://www.ama-assn.org/practice-management/prior-authorization/survey-quantifies-time-burdens-prior-authorization" target="_blank" rel="noopener">ama-assn.org</a></span></li>
               <li id="ref-12"><span>Commure, "Healthcare Call Center Metrics: Definitions and Where Each Target Comes From." <a href="https://www.commure.com/blog-agents/healthcare-call-center-metrics" target="_blank" rel="noopener">commure.com</a> <em>Vendor source.</em></span></li>
-              <li id="ref-13"><span>Arul Health conversation with the patient access and security teams of a large U.S. academic health system, 12 November 2026. Not named here. <em>Needs their agreement before publication.</em></span></li>
+              <li id="ref-13"><span>Arul Health, 50 conversations with providers at large health systems and independent practices, 2026. The detailed account is from the patient access and security teams of a large U.S. academic health system, November 2026. Organizations are not named.</span></li>
             </ol>
             <div class="cite">
               <span class="label">Cite this paper</span>
-              <span id="cite-text">Arul Health Research (2026). Who is calling? Voice agents at healthcare's front door. Paper 001 (draft). https://arulhealth.org/research/who-is-calling</span>
+              <span id="cite-text">Arul Health Research (2026). Who is calling? Voice agents at healthcare's front door. Paper 001. https://arulhealth.org/research/who-is-calling</span>
               <button type="button" data-copy="#cite-text">Copy citation</button>
             </div>
             <p style="font-size:15px;line-height:24px;color:var(--ink-2)">Arul is not a medical service and does not give medical or legal advice. Product names belong to their owners and are mentioned for identification only. Questions: <a href="mailto:support@arulhealth.com?subject=Research%20paper%20001">support@arulhealth.com</a>.</p>

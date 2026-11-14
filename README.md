@@ -50,7 +50,7 @@ Each paper is one HTML file in `research/`, served at `/research/<slug>`. The te
 - Every chart value is written in the HTML (`--v` on a bar or segment, `data-on` / `data-hot` on a scrolly step). `research.js` only animates; with JS off the page still shows every number.
 - Chart colors are the `--c-*` tokens at the top of `research.css`. They were checked for color-blind separation; check any new ones the same way before adding them.
 - To add a paper: copy `who-is-calling.html`, change the sections and figures, and add a tile to `research/index.html`.
-- Paper 001 (`who-is-calling.html`, voice agents at healthcare's front door) is a **draft**: it carries a yellow draft bar, yellow "confirm" tags (`.tbc`) and `noindex`. Remove all three, and get the health system's agreement for the field notes, before it is published. A paper can also use a call-transcript scrolly (`.lines` with `data-at` on each line) in place of the dot grid.
+- Paper 001 is `who-is-calling.html` (voice agents at healthcare's front door, the DIAL framework and the agentic healthcare proxy). A paper can use a call-transcript scrolly (`.lines` with `data-at` on each line) or the respondent dot grid (`data-dots`).
 
 ## Email list
 
