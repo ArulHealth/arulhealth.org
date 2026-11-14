@@ -16,6 +16,8 @@ script.js        mobile menu, article sheets
 assets/          logo, favicon
 assets/photos/   card and section photos
 assets/photos/scholars/  event photos for the Scholars page
+reach.html       Arul Reach, the partner network page, served at /reach: a short, high-level preview (hero, statement, three pillars, community logos, apply). reach.css holds its styles, reach.js draws the animated network behind the hero, and it reuses research.css / research.js. The full detail stays in the partner overview PDF. Apply buttons email rianna@arulhealth.org.
+research/        the Research tab: index.html (mosaic of papers), one .html per paper, research.css, research.js; see "Research" below
 firebase.json    Firebase Hosting config (site `arulhealth-org`; README, dotfiles and .github are not uploaded)
 ```
 
@@ -28,7 +30,8 @@ Only two things on the home page send visitors to arulhealth.com, both in a new 
 | "Up next" chain only (the "Our work" grid was removed) | `clinical-trials`, `rides-and-lodging`, `financial-aid`, `denials-and-appeals`, `pediatric-cancer`, `metastatic-breast-cancer`, `peer-navigators`, `medical-records` |
 | The three focus cards | `access-to-care`, `healthy-habits`, `stronger-communities` |
 | "Up next" chain only | `get-started` (contact by email to support@arulhealth.com) |
-| Footer: About Arul Health, Help | `about`, `help` |
+| Footer: Help | `help` |
+| "Up next" chain and `/#about` only ("Read our story", the story photo and the footer's "Our story" open `arulhealth.com/about` in a new tab) | `about` |
 
 How it works:
 
@@ -39,6 +42,17 @@ How it works:
 - To add an article: add a template, then put `data-sheet="<id>"` on the trigger. No script change needed.
 
 The articles were written on 2026-10-22 from the Arul Health knowledge vault. They name no partners or investors on purpose; add one only with that organization's sign-off.
+
+## Research
+
+`/research` is the research index: a mosaic of paper tiles (`.tile` in `research/index.html`), one per paper and nothing else. A paper on its own takes the full row; the first of several is the large `.tile-feature`. Tile art is drawn by `research.js` from `data-art` (`wave`, `people`, `rings`, `columns`, `ticks`).
+
+Each paper is one HTML file in `research/`, served at `/research/<slug>`. The template has a dark hero, a sticky section bar with scrollspy and a reading-progress line, numbered figures, one sticky "scrolly" figure whose dot grid changes as the steps scroll past, and a method-and-limits section with a citation block.
+
+- Every chart value is written in the HTML (`--v` on a bar or segment, `data-on` / `data-hot` on a scrolly step). `research.js` only animates; with JS off the page still shows every number.
+- Chart colors are the `--c-*` tokens at the top of `research.css`. They were checked for color-blind separation; check any new ones the same way before adding them.
+- To add a paper: copy `who-is-calling.html`, change the sections and figures, and add a tile to `research/index.html`.
+- Paper 001 is `who-is-calling.html` (voice agents at healthcare's front door, the DIAL framework and the agentic healthcare proxy). A paper can use a call-transcript scrolly (`.lines` with `data-at` on each line) or the respondent dot grid (`data-dots`).
 
 ## Email list
 

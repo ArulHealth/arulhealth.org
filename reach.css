@@ -1,0 +1,84 @@
+/* arulhealth.org/reach — Arul Reach. A short, high-level preview of the
+   partner network: the name, the mission in one line, a living network behind
+   it, three things members get, the community, and one way to apply. The
+   detail lives in the partner overview PDF, not here.
+   Loaded after /styles.css and /research/research.css (tokens, .label,
+   .reveal, tile art); this file adds only what is specific to this page. */
+
+/* ---------- Hero ---------- */
+.reach-hero { position: relative; min-height: min(100vh - 80px, 860px); display: flex; align-items: center; background: var(--night); color: var(--night-ink); overflow: hidden; isolation: isolate; }
+.reach-hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 70% 60% at 50% 45%, rgba(18, 10, 42, 0.86), rgba(18, 10, 42, 0.35) 60%, transparent 85%); }
+.net { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+.reach-hero-inner { display: grid; justify-items: center; text-align: center; gap: 28px; padding-top: 96px; padding-bottom: 96px; width: 100%; }
+.reach-hero .label { color: var(--mint); }
+.reach-hero h1 {
+  font-size: clamp(64px, 13vw, 184px); line-height: .95; letter-spacing: -0.035em;
+  background: linear-gradient(100deg, #ffffff 0%, #d9c8ff 38%, #b592ff 60%, var(--mint) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  background-size: 200% 100%; animation: sheen 9s ease-in-out infinite alternate;
+  padding-bottom: .08em;   /* room for descenders inside the clipped gradient */
+}
+@keyframes sheen { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+.reach-mission { max-width: 26ch; font-family: var(--font-serif); font-weight: 600; font-size: clamp(22px, 2.6vw, 34px); line-height: 1.3; color: #fff; text-wrap: balance; }
+.reach-cta { margin-top: 8px; }
+.btn-mint { display: inline-flex; align-items: center; gap: 10px; min-height: 56px; padding: 16px 32px; border-radius: 999px; background: var(--mint); color: #0b2a16; font-size: 17px; font-weight: 500; transition: background-color .2s, transform .2s var(--ease), box-shadow .2s; box-shadow: 0 0 0 0 rgba(207, 250, 223, 0.5); }
+.btn-mint:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 12px 40px -8px rgba(207, 250, 223, 0.55); }
+.btn-mint span { transition: transform .2s var(--ease); }
+.btn-mint:hover span { transform: translateX(3px); }
+
+/* ---------- Statement ---------- */
+.reach-statement { background: #fff; padding: 160px 0 120px; }
+.reach-statement p { max-width: 22em; margin-inline: auto; font-family: var(--font-serif); font-weight: 600; font-size: clamp(28px, 3.6vw, 48px); line-height: 1.25; letter-spacing: -0.01em; color: var(--heading); text-wrap: balance; }
+.reach-statement em { font-style: italic; color: var(--accent-hover); }
+
+/* ---------- Three pillars ---------- */
+.reach-pillars { background: #fff; padding-bottom: 160px; }
+.pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.pillar { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; min-height: 460px; padding: 32px; border-radius: 28px; background: var(--night); color: #fff; transition: transform .5s var(--ease); }
+.pillar:hover { transform: translateY(-6px); }
+.pillar .tile-art { opacity: .9; }
+.pillar::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, var(--pillar, var(--night)) 30%, transparent 78%); }
+.pillar .label { position: absolute; top: 28px; left: 32px; color: inherit; opacity: .7; }
+.pillar h2 { color: inherit; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.15; }
+.pillar p { margin-top: 12px; font-size: 17px; line-height: 26px; opacity: .85; max-width: 28ch; }
+.pillar.is-violet { background: #6b2bd9; --pillar: #6b2bd9; }
+.pillar.is-mint { background: #0b2a16; --pillar: #0b2a16; color: var(--mint); }
+@media (max-width: 900px) { .pillars { grid-template-columns: 1fr; } .pillar { min-height: 340px; } }
+
+/* ---------- Community ---------- */
+/* White, not the off-white paper tone: two of the logo files have white backgrounds */
+.reach-community { background: #fff; padding: 96px 0; text-align: center; border-block: 1px solid var(--rule); }
+/* Logos sit on one centered line and wrap evenly; each is sized by height so
+   a wide wordmark cannot outgrow its column on a phone. */
+.reach-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 36px 64px; margin-top: 40px; }
+.reach-logos li { display: flex; align-items: center; justify-content: center; }
+.reach-logos img { height: 72px; width: auto; max-width: min(240px, 70vw); object-fit: contain; filter: grayscale(1); opacity: .7; transition: opacity .2s, filter .2s; }
+.reach-logos .is-wide img { height: 46px; }
+.reach-logos .is-tall img { height: 96px; }   /* stacked marks need more height to read at the same weight */
+/* The pastel CNCF mark goes too pale in grayscale, so it is toned down to match */
+.reach-logos img[src*="cncf"] { filter: grayscale(1) brightness(.62); opacity: .8; }
+.reach-logos li:hover img { filter: none; opacity: 1; }
+.reach-more { margin-top: 36px; font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--ink-2); }
+@media (max-width: 640px) { .reach-logos { gap: 28px 40px; } .reach-logos img { height: 56px; } .reach-logos .is-wide img { height: 36px; } .reach-logos .is-tall img { height: 76px; } }
+
+/* ---------- Join ---------- */
+.reach-join { position: relative; background: var(--night); color: var(--night-ink); overflow: hidden; isolation: isolate; }
+.reach-join::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 110%; width: 120%; aspect-ratio: 2 / 1; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(142, 77, 255, 0.6), transparent); }
+.reach-join-inner { display: grid; justify-items: center; text-align: center; gap: 24px; padding-top: 144px; padding-bottom: 144px; }
+.reach-join .label { color: var(--mint); }
+.reach-join h2 { color: #fff; font-size: clamp(40px, 6vw, 84px); line-height: 1.04; letter-spacing: -0.02em; max-width: 14ch; }
+.reach-join p { max-width: 44ch; font-size: 19px; line-height: 30px; color: var(--night-ink-2); text-wrap: balance; }
+.reach-join .btn-mint { margin-top: 8px; }
+
+@media (max-width: 640px) {
+  .reach-hero { min-height: 78vh; }
+  .reach-statement { padding: 96px 0 72px; }
+  .reach-pillars { padding-bottom: 96px; }
+  .reach-join-inner { padding-top: 96px; padding-bottom: 96px; }
+}
+
+/* Orbit art on the first pillar: points circling a glowing core */
+.tile-art .orb { transform-origin: 150px 112px; animation: orb linear infinite; }
+@keyframes orb { to { transform: rotate(360deg); } }
+.tile-art .core { transform-origin: 150px 112px; animation: core 2.6s ease-in-out infinite alternate; }
+@keyframes core { from { transform: scale(.8); opacity: .65; } to { transform: scale(1.2); opacity: 1; } }
