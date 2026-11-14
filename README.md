@@ -16,7 +16,7 @@ script.js        mobile menu, article sheets
 assets/          logo, favicon
 assets/photos/   card and section photos
 assets/photos/scholars/  event photos for the Scholars page
-reach.html       Arul Reach, the partner program page, served at /reach (web version of the partner overview PDF); reach.css holds its styles and it reuses research.css and research.js
+reach.html       Arul Reach, the partner network page, served at /reach: a short, high-level preview (hero, statement, three pillars, community logos, apply). reach.css holds its styles, reach.js draws the animated network behind the hero, and it reuses research.css / research.js. The full detail stays in the partner overview PDF. Apply buttons email rianna@arulhealth.org.
 research/        the Research tab: index.html (mosaic of papers), one .html per paper, research.css, research.js; see "Research" below
 firebase.json    Firebase Hosting config (site `arulhealth-org`; README, dotfiles and .github are not uploaded)
 ```
