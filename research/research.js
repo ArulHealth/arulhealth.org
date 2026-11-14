@@ -128,10 +128,10 @@
     update();
   }
 
-  // ---- Scroll-linked pieces: timeline rail, hero photo drift ---------------
+  // ---- Scroll-linked pieces: timeline rail (and any [data-parallax] image) --
   // The timeline's rail fills as the reader scrolls through it, and each
-  // event switches on when the fill reaches its pin. The hero photo drifts
-  // a few pixels against the scroll. Both run off one rAF-throttled handler.
+  // event switches on when the fill reaches its pin. An image marked
+  // data-parallax drifts a few pixels against the scroll.
   const tracks = $$('[data-track]');
   const drift = $$('[data-parallax]');
   if (tracks.length || drift.length) {
