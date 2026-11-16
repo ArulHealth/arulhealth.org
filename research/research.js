@@ -161,6 +161,18 @@
     }
   }
 
+  // ---- Pause looping animations while they are off screen ------------------
+  // The waveform, pulse dots and tile art loop forever. Left running below
+  // the fold they keep the compositor busy for the whole read, which shows up
+  // as flicker while scrolling in some browsers.
+  const loopers = $$('.call, .tile-art');
+  if (loopers.length && 'IntersectionObserver' in window) {
+    const vis = new IntersectionObserver((entries) => {
+      entries.forEach((en) => en.target.classList.toggle('is-offscreen', !en.isIntersecting));
+    }, { rootMargin: '100px 0px' });
+    loopers.forEach((el) => vis.observe(el));
+  }
+
   // ---- Tooltips on chart marks -------------------------------------------
   const tipped = $$('[data-tip]');
   if (tipped.length) {
